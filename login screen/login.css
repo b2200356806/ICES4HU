@@ -1,0 +1,29 @@
+/* blue color: #17a2b8 */
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url(https://images4.alphacoders.com/278/278856.jpg);
+    height: 100vh;
+  }
+  #login .container #login-row #login-column #login-box {
+    margin-top: 60px;
+    max-width: 600px;
+    height: 320px;
+    border: 1px solid #bbb3b3;
+    background-color: #EAEAEA;
+  }
+  #login .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
+  }
+  #login .container #login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+    /* width: 50%; */
+  }
+
