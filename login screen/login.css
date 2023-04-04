@@ -1,16 +1,15 @@
 /* blue color: #17a2b8 */
 body {
-    margin: 0;
+    margin-top: -8px;
     padding: 0;
-    background-image: url(https://images4.alphacoders.com/278/278856.jpg);
-    height: 100vh;
+    /* background-image: url(https://images4.alphacoders.com/278/278856.jpg); */
   }
   #login .container #login-row #login-column #login-box {
     margin-top: 60px;
     max-width: 600px;
     height: 320px;
     border: 1px solid #bbb3b3;
-    background-color: #EAEAEA;
+    background-color: #202027;
   }
   #login .container #login-row #login-column #login-box #login-form {
     padding: 20px;
@@ -19,7 +18,7 @@ body {
     margin-top: -85px;
   }
 
-  .center {
+  .centerize {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -27,3 +26,36 @@ body {
     /* width: 50%; */
   }
 
+
+.img-bg{
+  opacity: 0.5;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: auto;
+  z-index: -1;
+}
+
+.text-bg{
+  background-color: #2F303A;
+  padding: 1%;
+  margin-top: 1%;
+  text-align: center;
+}
+h1{
+  text-align: center;
+}
+
+h1 span{
+  background-color: #2F303A;
+  padding: 2%;
+  border-radius: 25px;
+  
+}
+
+h3 span{
+  background-color: #2F303A;
+  padding: 2%;
+  border-radius: 25px;
+  
+}
