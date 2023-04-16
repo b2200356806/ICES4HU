@@ -1,16 +1,47 @@
 package penguins.backend.Course;
 
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public interface CourseRepository {
-    List<Course> findAll();
+@Component
+public class CourseRepository {
 
-    Optional<Course> findByCourseCode(String courseCode);
+    private final List<Course> courses = new ArrayList<>();
 
-    boolean existsByCourseCode(String courseCode);
 
-    Course save(Course course);
+    public List<Course> findAll() {
+        return courses;
+    }
 
-    void deleteByCourseCode(String courseCode);
+
+    public Optional<Course> findByCourseCode(String courseCode) {
+        for (Course course : courses)
+            if (course.getCourseCode().equals(courseCode))
+                return Optional.of(course);
+
+        return Optional.empty();
+    }
+
+
+    public boolean existsByCourseCode(String courseCode) {
+        for (Course course : courses)
+            if (course.getCourseCode().equals(courseCode))
+                return true;
+        return false;
+    }
+
+
+    public Course save(Course course) {
+        courses.remove(course);
+        courses.add(course);
+        return course;
+    }
+
+
+    public void deleteByCourseCode(String courseCode) {
+        courses.removeIf(course -> course.getCourseCode().equals(courseCode));
+    }
 }
