@@ -9,7 +9,10 @@
 4. Enroll a student to a course: /api/students/{user_id}/enroll/{course_code}
 5. Drop a student from a course: /api/students/{user_id}/drop/{course_code}
 
-6. 
+6. List all the courses: /api/courses/all
 
-
-
+7. Add a course: /api/admin/courses/add
+8. Start the semester: /api/admin/semester/start
+9. Finish the semester: /api/admin/semester/finish
+10. Get semester status: /api/admin/semester/status
+11. Add some examples of students and courses to the database: /api/admin/add-examples
