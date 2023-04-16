@@ -3,33 +3,25 @@ package penguins.backend.Semester;
 public class Semester {
 
     private static boolean started = false;
-    private static boolean courseEvaluation = false;
-    private static boolean courseRegistration = false;
-
     private Semester() {}
 
+    /**
+     * Indicates whether the semester is started.
+     * @return true if the semester is started, false otherwise
+     */
     public static boolean isStarted() {
         return started;
     }
 
+
+    /**
+     * Starts and finishes the semester.
+     * @param started true to start the semester, false otherwise
+     */
     public static void setStarted(boolean started) {
         Semester.started = started;
     }
 
-    public static boolean isCourseEvaluation() {
-        return courseEvaluation;
-    }
 
-    public static void setCourseEvaluation(boolean courseEvaluation) {
-        Semester.courseEvaluation = courseEvaluation;
-    }
-
-    public static boolean isCourseRegistration() {
-        return courseRegistration;
-    }
-
-    public static void setCourseRegistration(boolean courseRegistration) {
-        Semester.courseRegistration = courseRegistration;
-    }
 
 }
