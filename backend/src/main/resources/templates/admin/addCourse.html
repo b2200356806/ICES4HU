@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/admin/css/style.css">
+    <title>Add Course</title>
+</head>
+<body>
+    <!--Navigation bar-->
+    <div th:replace="admin/fragments/nav.html"></div>
+    <!--end of Navigation bar-->
+
+    <div class="container-fluid text-left text-white page-position">
+        <div class="page-background">
+            <h1>Add Course</h1>
+            <form id="addCourseForm">
+                <div class="form-group mb-3">
+                    <label for="courseCode">Course ID</label>
+                    <input type="text" class="form-control" id="courseCode" name="courseCode" pattern="[A-Z]{3}[0-9]{3}" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="name">Course Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="department">Department</label>
+                    <input type="text" class="form-control" id="department" name="department" required>
+                </div>
+                <button type="submit" class="btn btn-primary" value="Submit">Add</button>
+            </form>
+        </div>
+    </div>
+    <script src="/admin/js/addCourse.js"></script>
+</body>
+</html>
