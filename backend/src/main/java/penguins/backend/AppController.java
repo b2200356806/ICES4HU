@@ -5,19 +5,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AppController {
-    @GetMapping("/admin/manageSemester.html")
+    @GetMapping("/admin/manageSemester")
     public String viewHomePage() {return "admin/manageSemester";}
 
-    @GetMapping("/admin/addCourse.html")
+    @GetMapping("/admin/addCourse")
     public String viewCourse() {return "admin/addCourse";}
 
-    @GetMapping("/admin/homePage.html")
+    @GetMapping("/admin/homePage")
     public String viewHome() {return "admin/homePage";}
 
-    @GetMapping("/student/homePage.html")
+    @GetMapping("/student/homePage")
     public String viewStudentHome() {return "student/homePage";}
 
-    @GetMapping("/student/enrollCourses.html")
+    @GetMapping("/student/enrollCourses")
     public String viewStudentCourses() {return "student/enrollCourses";}
 
 }
