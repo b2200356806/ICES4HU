@@ -17,3 +17,11 @@ Add some examples of students and courses to the database: /api/admin/add-exampl
 8. Start the semester: /api/admin/semester/start
 9. Finish the semester: /api/admin/semester/finish
 10. Get semester status: /api/admin/semester/status
+
+
+## URLs
+1. Admin homepage: http://localhost:8080/admin/homePage
+2. Admin add courses: http://localhost:8080/admin/addCourse
+3. Admin manage semester: http://localhost:8080/admin/manageSemester
+4. Student homepage: http://localhost:8080/student/homePage
+5. Student enroll courses: http://localhost:8080/student/enrollCourses
