@@ -5,7 +5,8 @@ $(document).ready(function () {
     });
     $('#myTable').dataTable({
         pageLength: 5,
-        lengthChange: false
+        lengthChange: false,
+        info: false
     });
 });
 
