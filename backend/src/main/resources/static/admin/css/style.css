@@ -5,21 +5,28 @@ body{
     margin-bottom: 0;
     border-radius: 0;
     background-color: #202027;
+    position: relative;
 }
 
 .navbar-header{
-    height: 7vh;
+    height: 7%;
 }
- 
+
 .row.content {height: 100%}
-  
+
+#hulogo{
+    width: 4%;
+    height: 4%;
+    display: inline-block;
+}
+
 #sidenav {
     padding-top: 20px;
     background-color: #202027;
-    height: 100vh;
-    width: 30rem;
+    height: 100%;
+    width: 15%;
     text-align: center;
-    position: fixed;
+    position: absolute;
 }
 
 .logo {
@@ -48,7 +55,7 @@ body{
 }
 
 .page-position{
-    padding-left: 40rem;
+    margin-left: 20%;
     padding-top: 3%;
     padding-right: 3%;
     padding-bottom: 3%;
