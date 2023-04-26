@@ -11,6 +11,22 @@ $(document).ready(function () {
 });
 
 
+let enrollCourses = [];
+
+// watch for change events on the checkbox
+$("#courseTable").on('change', 'input[type="checkbox"]' , function () {
+    let value = $(this).closest("tr")[0];
+    value = value.cells[2].innerHTML;
+
+    if(this.checked) {
+        enrollCourses.push(value);	// record the value of the checkbox to valArray
+    } else {
+        let index = enrollCourses.indexOf(value);
+        if (index !== -1) {
+            enrollCourses.splice(index, 1);
+        }	// remove the recorded value of the checkbox
+    }
+});
 
 const dbParam = JSON.stringify();
 const xmlhttp = new XMLHttpRequest();
@@ -30,35 +46,34 @@ xmlhttp.open("GET", "http://localhost:8080/api/courses/all");
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send(dbParam);
 
-
 function GetSelected() {
-    //Reference the Table.
-    var grid = document.getElementById("courseTable");
-
-    //Reference the CheckBoxes in Table.
-    var checkBoxes = grid.getElementsByTagName("input");
-    var message = "";
-
-    //Loop through the CheckBoxes.
-    for (var i = 0; i < checkBoxes.length; i++) {
-        if (checkBoxes[i].checked) {
-            var row = checkBoxes[i].parentNode.parentNode;
-            message += row.cells[2].innerHTML;
-            message += "\n";
-        }
-    }
-
-    var xhr = new XMLHttpRequest();
-    const codes = message.split("\n");
-    codes.pop();
+    const codes = enrollCourses;
     for (let i in codes) {
-        xhr.open("POST", "http://localhost:8080/api/students/1/enroll/"+codes[i]);
-        xhr.send();
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8080/api/students/1/enroll/"+codes[i], false);
+        xhr.send(null);
     }
     location.reload();
 }
 
 
+
+let dropCourses = [];
+
+// watch for change events on the checkbox
+$("#myTable").on('change', 'input[type="checkbox"]' , function () {
+    let value = $(this).closest("tr")[0];
+    value = value.cells[2].innerHTML;
+
+    if(this.checked) {
+        dropCourses.push(value);	// record the value of the checkbox to valArray
+    } else {
+        let index = dropCourses.indexOf(value);
+        if (index !== -1) {
+            dropCourses.splice(index, 1);
+        }	// remove the recorded value of the checkbox
+    }
+});
 
 const mydbParam = JSON.stringify();
 const myxmlhttp = new XMLHttpRequest();
@@ -80,28 +95,11 @@ myxmlhttp.send(mydbParam);
 
 
 function DropSelected() {
-    //Reference the Table.
-    var grid = document.getElementById("myTable");
-
-    //Reference the CheckBoxes in Table.
-    var checkBoxes = grid.getElementsByTagName("input");
-    var message = "";
-
-    //Loop through the CheckBoxes.
-    for (var i = 0; i < checkBoxes.length; i++) {
-        if (checkBoxes[i].checked) {
-            var row = checkBoxes[i].parentNode.parentNode;
-            message += row.cells[2].innerHTML;
-            message += "\n";
-        }
-    }
-
-    var xhr = new XMLHttpRequest();
-    const codes = message.split("\n");
-    codes.pop();
+    const codes = dropCourses;
     for (let i in codes) {
-        xhr.open("POST", "http://localhost:8080/api/students/1/drop/"+codes[i]);
-        xhr.send();
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8080/api/students/1/drop/"+codes[i], false);
+        xhr.send(null);
     }
     location.reload();
 }
