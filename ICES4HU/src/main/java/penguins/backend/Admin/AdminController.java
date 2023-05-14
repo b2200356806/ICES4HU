@@ -55,9 +55,9 @@ public class AdminController {
      * @return ResponseEntity indicating if the course was removed
      */
     @PostMapping(path = "/courses/remove")
-    public ResponseEntity<String> removeCourse(@RequestBody String courseCode) {
+    public ResponseEntity<String> removeCourse(@RequestBody Course course) {
         try {
-            adminService.removeCourse(courseCode);
+            adminService.removeCourse(course.getCourseCode());
             return ResponseEntity.ok("Course removed successfully");
         } catch (CourseNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course does not exist");
