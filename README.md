@@ -5,6 +5,7 @@
 
 Please note that some of the endpoints have a note indicating that only a certain attribute is required in the requestBody. For such endpoints, make sure the required attribute is present in the body. For example, to send an Instructor requestBody with only userId being required, you can send:
 {"userId": 120}
+
 For an EvaluationQuestion having only questionId attribute required, you can send:
 {"questionId": 34}
 
