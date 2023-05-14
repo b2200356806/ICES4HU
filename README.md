@@ -4,10 +4,9 @@
 ## API Endpoints
 
 ### Admin
-#### Get all courses in the system
-| Method | Endpoint |
-| :------| :--------|
-| GET    | /api/admin/{user_id}/courses |
+| Description     | Method | Endpoint |
+| :-----------    | :------| :--------|
+| Get all courses | GET    | /api/admin/{user_id}/courses |
 
 
 
