@@ -39,9 +39,9 @@
 | Get account info                       | GET    |                    | /api/instructors/{user_id}/                                              |
 | Get courses                            | GET    |                    | /api/instructors/{user_id}/courses                                       |
 | Create/get EvaluationForms for courses | GET    |                    | /api/instructors/{user_id}/evaluation                                    |
-| Get EvaluationForm for course          | GET    |                    | /api/instructors/{user_id}/evaluation/{evaluationform_id}                |
-| Add evaluation question to course      | POST   | EvaluationQuestion | /api/instructors/{user_id}/evaluation/{evaluationform_id}/add-question    |
-| Remove evaluation question from course | POST   | EvaluationQuestion | /api/instructors/{user_id}/evaluation/{evaluationform_id}/remove-question |
+| Get EvaluationForm for a course          | GET    |                    | /api/instructors/{user_id}/evaluation/{evaluationform_id}                |
+| Add evaluation question to a course      | POST   | EvaluationQuestion | /api/instructors/{user_id}/evaluation/{evaluationform_id}/add-question    |
+| Remove evaluation question from a course | POST   | EvaluationQuestion | /api/instructors/{user_id}/evaluation/{evaluationform_id}/remove-question |
 | Get evaluation result for a course     | GET    |                    | /api/instructors/{user_id}/evaluation/result/{course_code}                |
 | Update account info                    | POST   | UserUpdateRequest  | /api/instructors/{user_id}/update-info                                   |
 
