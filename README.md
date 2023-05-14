@@ -54,7 +54,7 @@
 | Enroll to a course                     | POST   |                    | /api/students/{user_id}/courses/enroll/{course_code}                  |
 | Drop a course                          | POST   |                    | /api/students/{user_id}/courses/drop/{course_code}                    |
 | Get EvaluationForms for courses        | GET    |                    | /api/students/{user_id}/evaluation                                    |
-| Evaluate a course                      | POST   | List<EvaluationResponseDto> | /api/students/{user_id}/evaluation/{course_code}             |
+| Evaluate a course                      | POST   | List(EvaluationResponseDto) | /api/students/{user_id}/evaluation/{course_code}             |
 | Update account info                    | POST   | UserUpdateRequest  | /api/students/{user_id}/update-info                                   |
 
 
