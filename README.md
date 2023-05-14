@@ -4,19 +4,21 @@
 ## API Endpoints
 
 ### Admin
-| Description                 | Method | RequestBody | Endpoint |
-| :---------------------------| :------| :-----------| :--------|
-| Get all courses             | GET    |             | /api/admin/{user_id}/courses                             |
-| Add a course                | POST   | Course      | /api/admin/{user_id}/courses/add                         |
-| Remove a course             | POST   | courseCode  | /api/admin/{user_id}/courses/remove                      | 
-| Start semester              | POST   |             | /api/admin/{user_id}/semester/start                      |
-| Finish semester             | POST   |             | /api/admin/{user_id}/semester/finish                     |
-| Start evaluation            | POST   |             | /api/admin/{user_id}/evaluation/start                    |
-| Finish evaluation           | POST   |             | /api/admin/{user_id}/evaluation/finish                   |
-| Start add/drop              | POST   |             | /api/admin/{user_id}/add-or-drop/start                   |
-| Finish add/drop             | POST   |             | /api/admin/{user_id}/add-or-drop/finish                  |
-| Get semester info           | GET    |             | /api/admin/{user_id}/semester                            |
-
+| Description                 | Method | RequestBody        | Endpoint                                                 |
+| :---------------------------| :------| :------------------| :--------------------------------------------------------|
+| Get all courses             | GET    |                    | /api/admin/{user_id}/courses                             |
+| Add a course                | POST   | Course             | /api/admin/{user_id}/courses/add                         |
+| Remove a course             | POST   | courseCode         | /api/admin/{user_id}/courses/remove                      | 
+| Start semester              | POST   |                    | /api/admin/{user_id}/semester/start                      |
+| Finish semester             | POST   |                    | /api/admin/{user_id}/semester/finish                     |
+| Start evaluation            | POST   |                    | /api/admin/{user_id}/evaluation/start                    |
+| Finish evaluation           | POST   |                    | /api/admin/{user_id}/evaluation/finish                   |
+| Start add/drop              | POST   |                    | /api/admin/{user_id}/add-or-drop/start                   |
+| Finish add/drop             | POST   |                    | /api/admin/{user_id}/add-or-drop/finish                  |
+| Get semester info           | GET    |                    | /api/admin/{user_id}/semester                            |
+| Update account info         | POST   | UserUpdateRequest  | /api/admin/{user_id}/update-info                         |
+| Admit student               | POST   |                    | /api/admin/{user_id}/admit/{student_id}                  |
+| Create first admin account  | POST   |                    | /api/admin/{user_id}/create-first-admin                  |
 
 
 Add some examples of students and courses to the database: /api/admin/add-examples
