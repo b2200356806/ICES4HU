@@ -13,7 +13,7 @@ import penguins.backend.User.UserUpdateRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/{UserId}")
+@RequestMapping("/api/admin/{userId}")
 public class AdminController {
 
     private final AdminService adminService;
