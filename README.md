@@ -7,7 +7,12 @@
 | Description     | Method | RequestBody | Endpoint |
 | :---------------| :------| :-----------| :--------|
 | Get all courses | GET    |             |/api/admin/{user_id}/courses |
-| Add a course    | POST   |    Course   | /api/admin/{user_id}/courses/add |
+| Add a course    | POST   | Course      | /api/admin/{user_id}/courses/add |
+| Remove a course | POST   | courseCode  | /api/admin/{user_id}/courses/remove |
+| Start semester  | POST   |             | /api/admin/{user_id}/semester/start |
+| Finish semester | POST   |             | /api/admin/{user_id}/semester/finish |
+| Start evaluation | POST  |             | /api/admin/{user_id}/evaluation/start |
+| Finish evaluation | POST |             | /api/admin/{user_id}/evaluation/finish |
 
 
 
