@@ -8,7 +8,7 @@
 | :---------------------------| :------| :------------------| :--------------------------------------------------------| :----------------------- |
 | Get all courses             | GET    |                    | /api/admin/{user_id}/courses                             ||
 | Add a course                | POST   | Course             | /api/admin/{user_id}/courses/add                         ||
-| Remove a course             | POST   | Course             | /api/admin/{user_id}/courses/remove                      |Only courseCode attribute is required|
+| Remove a course             | POST   | Course             | /api/admin/{user_id}/courses/remove                      |Only courseCode attribute is required in the requestBody|
 | Start semester              | POST   |                    | /api/admin/{user_id}/semester/start                      ||
 | Finish semester             | POST   |                    | /api/admin/{user_id}/semester/finish                     ||
 | Start evaluation            | POST   |                    | /api/admin/{user_id}/evaluation/start                    ||
