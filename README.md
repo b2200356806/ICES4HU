@@ -33,6 +33,19 @@
 | Update account info             | POST   | UserUpdateRequest  | /api/department-managers/{user_id}/update-info                         |
 
 
+### Instructor
+| Description                            | Method | RequestBody        | Endpoint                                                                 |
+| :--------------------------------------| :------| :------------------| :--------------------------------------------------------------          |
+| Get account info                       | GET    |                    | /api/instructors/{user_id}/                                              |
+| Get courses                            | GET    |                    | /api/instructors/{user_id}/courses                                       |
+| Create/get EvaluationForms for courses | GET    |                    | /api/instructors/{user_id}/evaluation                                    |
+| Get EvaluationForm for course          | GET    |                    | /api/instructors/{user_id}/evaluation/{evaluationform_id}                |
+| Add evaluation question to course      | POST   | EvaluationQuestion | /api/instructors/{user_id}/evaluation/{evaluationform_id}/add-question    |
+| Remove evaluation question from course | POST   | EvaluationQuestion | /api/instructors/{user_id}/evaluation/{evaluationform_id}/remove-question |
+| Get evaluation result for a course     | GET    |                    | /api/instructors/{user_id}/evaluation/result/{course_code}                |
+| Update account info                    | POST   | UserUpdateRequest  | /api/instructors/{user_id}/update-info                                   |
+
+
 
 
 Add some examples of students and courses to the database: /api/admin/add-examples
