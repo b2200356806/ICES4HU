@@ -3,6 +3,13 @@
 
 ## API Endpoints
 
+
+
+
+
+
+
+
 Add some examples of students and courses to the database: /api/admin/add-examples
 
 1. List all the students: /api/students/all
