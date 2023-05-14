@@ -58,7 +58,6 @@
 | Update account info                    | POST   | UserUpdateRequest  | /api/students/{user_id}/update-info                                   |
 
 
-
 Add some examples of students and courses to the database: /api/admin/add-examples
 
 1. List all the students: /api/students/all
