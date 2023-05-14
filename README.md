@@ -19,6 +19,7 @@
 | Update account info         | POST   | UserUpdateRequest  | /api/admin/{user_id}/update-info                         |
 | Admit student               | POST   |                    | /api/admin/{user_id}/admit/{student_id}                  |
 | Create first admin account  | POST   |                    | /api/admin/{user_id}/create-first-admin                  |
+| Add some examples           | POST   |                    | /api/admin/{user_id}/add-examples                        |
 
 ### Department Manager
 | Description                     | Method | RequestBody        | Endpoint                                                               |
