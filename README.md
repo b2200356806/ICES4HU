@@ -10,7 +10,7 @@ For an EvaluationQuestion having only questionId attribute required, you can sen
 {"questionId": 34}
 
 However, to send an object without such note, you need to send all the attributes. For example, to send a Course object, you need to send:
-{"courseCode": "BBM382", "name":"Software Engineering", ...}
+{"courseCode": "BBM382", "name":"Software Engineering", ...} and other attributes.
 
 ### Admin
 | Description                 | Method | RequestBody        | Endpoint                                                 | Notes                    |
