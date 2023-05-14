@@ -5,9 +5,9 @@
 
 ### Admin
 #### Get all courses in the system
-| Method | 
-| :------|
-| GET    |
+| Method | Endpoint |
+| :------| :--------|
+| GET    | /api/admin/{user_id}/courses |
 
 
 
