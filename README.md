@@ -3,6 +3,14 @@
 
 ## API Endpoints
 
+Please note that some of the endpoints have a note indicating that only a certain attribute is required in the requestBody. For such endpoints, make sure the required attribute is present in the body. For example, to send an Instructor requestBody with only userId being required, you can send:
+{"userId": 120}
+For an EvaluationQuestion having only questionId attribute required, you can send:
+{"questionId": 34}
+
+However, to send an object without such note, you need to send all the attributes. For example, to send a Course object, you need to send:
+{"courseCode": BBM382, "name":"Software Engineering", ...}
+
 ### Admin
 | Description                 | Method | RequestBody        | Endpoint                                                 | Notes                    |
 | :---------------------------| :------| :------------------| :--------------------------------------------------------| :----------------------- |
