@@ -3,10 +3,11 @@
 
 ## API Endpoints
 
-
-
-
-
+### Admin
+#### Get all courses in the system
+| Method | 
+| :------|
+| GET    |
 
 
 
