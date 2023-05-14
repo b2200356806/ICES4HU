@@ -1,8 +1,9 @@
 package penguins.backend.Course;
 
 import org.springframework.stereotype.Service;
-import penguins.backend.Course.Exception.CourseAlreadyExistsException;
-import penguins.backend.Course.Exception.CourseNotFoundException;
+import penguins.backend.Course.CourseException.CourseAlreadyExistsException;
+import penguins.backend.Course.CourseException.CourseNotFoundException;
+import penguins.backend.Department.Department;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,16 @@ public class CourseService {
 
 
     /**
+     * Finds and returns the courses in the given department.
+     * @param department course department
+     * @return courses in the given department
+     */
+    public List<Course> getCoursesByDepartment(Department department) {
+        return new ArrayList<>(courseRepository.findByDepartment(department));
+    }
+
+
+    /**
      * Adds a course to database if it doesn't already exist.
      * @param course the course object to add to the database
      * @return the course in the database
@@ -65,4 +76,17 @@ public class CourseService {
     }
 
 
+    /**
+     * Updates a course in the database.
+     * @param course the course object with updated attributes
+     * @return the updated course in the database
+     * @throws CourseNotFoundException if there is no course to update with the given course code
+     */
+    public Course updateCourse(Course course) throws CourseNotFoundException {
+        if (!courseRepository.existsByCourseCode(course.getCourseCode())) {
+            throw new CourseNotFoundException("Course does not exist. Course Code: " + course.getCourseCode());
+        }
+        return this.courseRepository.save(course);
+    }
+    
 }
