@@ -4,10 +4,10 @@
 ## API Endpoints
 
 ### Admin
-| Description     | Method | Endpoint |
-| :-----------    | :------| :--------|
-| Get all courses | GET    | /api/admin/{user_id}/courses |
-| Add a course    | POST   | /api/admin/{user_id}/courses/add |
+| Description     | Method | RequestBody | Endpoint |
+| :-----------    | :------| :---------| :--------|
+| Get all courses | GET    | :---------| /api/admin/{user_id}/courses |
+| Add a course    | POST   | :---------| /api/admin/{user_id}/courses/add |
 
 
 
