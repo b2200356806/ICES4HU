@@ -5,9 +5,8 @@
 
 ### Admin
 | Description     | Method | RequestBody | Endpoint |
-| :-----------    | :------| :---------| :--------|
-| Get all courses | GET    |            |/api/admin/{user_id}/courses |
-| Add a course    | POST   |            | /api/admin/{user_id}/courses/add |
+| Get all courses | GET    |             |/api/admin/{user_id}/courses |
+| Add a course    | POST   |    Course   | /api/admin/{user_id}/courses/add |
 
 
 
