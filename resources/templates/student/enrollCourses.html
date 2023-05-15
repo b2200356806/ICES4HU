@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+
+  <title>Enroll in Courses</title>
+</head>
+
+<body>
+  <!--Navigation bar-->
+  <div id="nav-placeholder">
+  </div>
+
+  <script>
+    $(function () {
+      $("#nav-placeholder").load("nav.html");
+    });
+  </script>
+  <!--end of Navigation bar-->
+
+  <div class="container-fluid text-left text-white page-position">
+    <div class="page-background">
+      <h1>Enroll in Courses</h1>
+      <h3>Available Courses:</h3>
+      <div>
+        <section class="intro">
+          <div class="h-100">
+            <div class="mask d-flex align-items-center h-100">
+              <div class="container">
+                <div class="row justify-content-center">
+                  <div class="col-12">
+                    <table class="table table-dark table-bordered mb-0" id="myTable">
+                      <thead>
+                        <tr>
+                          <th scope="col">EMPLOYEES</th>
+                          <th scope="col">POSITION</th>
+                          <th scope="col">CONTACTS</th>
+                          <th scope="col">AGE</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">Aiger Nixon</th>
+                          <td>System Architect</td>
+                          <td>tnixon12@example.com</td>
+                          <td><button type="submit" class="btn btn-primary" id="add-btn">Add</button></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Biger Nixon</th>
+                          <td>System Architect</td>
+                          <td>tnixon12@example.com</td>
+                          <td><button type="submit" class="btn btn-primary">Add</button></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Ciger Nixon</th>
+                          <td>System Architect</td>
+                          <td>tnixon12@example.com</td>
+                          <td><button type="submit" class="btn btn-primary">Add</button></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Diger Nixon</th>
+                          <td>System Architect</td>
+                          <td>tnixon12@example.com</td>
+                          <td><button type="submit" class="btn btn-primary">Add</button></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Eiger Nixon</th>
+                          <td>System Architect</td>
+                          <td>tnixon12@example.com</td>
+                          <td><button type="submit" class="btn btn-primary">Add</button></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Tiger Nixon</th>
+                          <td>System Architect</td>
+                          <td>tnixon12@example.com</td>
+                          <td><button type="submit" class="btn btn-primary">Add</button></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Tiger Nixon</th>
+                          <td>System Architect</td>
+                          <td>tnixon12@example.com</td>
+                          <td><button type="submit" class="btn btn-primary">Add</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <hr>
+      <h3>My Courses:</h3>
+    </div>
+  </div>
+</body>
+<script src="enrollCourse.js"></script>
+
+</html>
