@@ -34,6 +34,10 @@ body {
   right: 0;
   height: auto;
   z-index: -1;
+  background-image: url(https://images4.alphacoders.com/278/278856.jpg);
+}
+.iceberg{
+  background-image: url(https://images4.alphacoders.com/278/278856.jpg);
 }
 
 .text-bg{

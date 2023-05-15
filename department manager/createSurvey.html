@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Add questions to form -->
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>Create Evaluation Form</title>
+</head>
+
+<body>
+    <!--Navigation bar-->
+    <div id="nav-placeholder">
+    </div>
+
+    <script>
+        $(function () {
+            $("#nav-placeholder").load("nav.html");
+        });
+    </script>
+    <!--end of Navigation bar-->
+
+    <div class="container-fluid text-left text-white page-position">
+        <div class="page-background">
+            <h1>Create Evaluation Form</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="control-group" id="fields">
+                        <label class="control-label" for="field1"></label>
+                        <div class="controls">
+                            <form role="form" autocomplete="off">
+                                <div class="entry input-group col-xs-3">
+                                    <input class="form-control" name="fields[]" type="text"
+                                        placeholder="Type something" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success btn-add" type="button">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </form>
+                            <br>
+                            <small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another questions
+                            </small>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="add-btn" style="margin-top: 2%;">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+<script src="createSurvey.js"></script>
+
+</html>
