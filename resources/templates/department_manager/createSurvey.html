@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/instructor/css/style.css">
+    <link rel="stylesheet" href="/department_manager/css/style.css">
 
     <!-- Add questions to form -->
     <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
@@ -20,7 +20,7 @@
 
 <body>
 <!--Navigation bar-->
-<div th:replace="instructor/fragments/nav.html"></div>
+<div th:replace="department_manager/fragments/nav.html"></div>
 <!--end of Navigation bar-->
 
 <div class="container-fluid text-left text-white page-position">
@@ -29,7 +29,8 @@
         <div class="container">
             <div class="row">
                 <div class="control-group" id="fields">
-                    <label class="control-label" for="field1"></label>
+                    <!--                        for="field1"-->
+                    <label class="control-label"></label>
                     <div class="controls">
                         <form role="form" autocomplete="off">
                             <div class="entry input-group col-xs-3">
@@ -55,6 +56,6 @@
 </div>
 
 </body>
-<script src="/instructor/js/createSurvey.js"></script>
+<script src="/department_manager/js/createSurvey.js"></script>
 
 </html>

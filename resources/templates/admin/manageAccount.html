@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -9,21 +9,13 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="/admin/css/style.css">
     <title>Manage Account</title>
 </head>
 
 <body>
     <!--Navigation bar-->
-    <div id="nav-placeholder">
-    </div>
-
-    <script>
-        $(function () {
-            $("#nav-placeholder").load("nav.html");
-        });
-    </script>
+    <div th:replace="admin/fragments/nav.html"></div>
     <!--end of Navigation bar-->
 
     <div class="container-fluid text-left text-white page-position">
@@ -60,7 +52,7 @@
 
 
 </body>
-<script src="manageAccount.js"></script>
+<script src="/admin/js/manageAccount.js"></script>
 
 
 </html>
