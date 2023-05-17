@@ -9,6 +9,7 @@ import penguins.backend.Course.CourseType;
 import penguins.backend.Course.CourseException.CourseAlreadyExistsException;
 import penguins.backend.Course.CourseException.CourseNotFoundException;
 import penguins.backend.Department.Department;
+import penguins.backend.Department.DepartmentService;
 import penguins.backend.DepartmentManager.DepartmentManager;
 import penguins.backend.DepartmentManager.DepartmentManagerRepository;
 import penguins.backend.Instructor.Instructor;
@@ -33,6 +34,7 @@ public class AdminService {
     private final CourseService courseService;
     private final UserService userService;
     private final StudentService studentService;
+    private final DepartmentService departmentService;
 
     /* Used for addExamplesToDatabase() method */
     @Autowired
@@ -47,11 +49,12 @@ public class AdminService {
     private UserRepository userRepository;
 
     public AdminService(AdminRepository adminRepository, CourseService courseService, UserService userService,
-                        StudentService studentService) {
+                        StudentService studentService, DepartmentService departmentService) {
         this.adminRepository = adminRepository;
         this.courseService = courseService;
         this.userService = userService;
         this.studentService = studentService;
+        this.departmentService = departmentService;
     }
 
 
@@ -71,6 +74,8 @@ public class AdminService {
      * @throws CourseAlreadyExistsException if there is another course in the database with the same course code
      */
     public Course addCourse(Course course) throws CourseAlreadyExistsException {
+        Department department = departmentService.getOrCreateDepartment(course.getDepartment().getName());
+        course.setDepartment(department);
         return courseService.addCourse(course);
     }
 
