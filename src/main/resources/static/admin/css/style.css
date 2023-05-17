@@ -91,3 +91,54 @@ body{
 #img-upload {
     width: 10%;
 }
+
+/* table */
+.intro {
+    height: 100%;
+    overflow-x: auto;
+}
+
+table td,
+table th {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+thead th,
+tbody th {
+    color: #fff;
+    background-color: #202027;
+}
+
+tbody td {
+    font-weight: 500;
+    background-color: #202027;
+    color: #fff;
+}
+
+.dataTables_wrapper,
+.dataTables_filter {
+    color: #fff !important;
+}
+
+input {
+    color: black !important;
+}
+
+.dataTables_wrapper,
+.dataTables_info {
+    color: #fff !important;
+}
+
+#myTable_previous {
+    color: #fff !important;
+}
+
+#myTable_next {
+    color: #fff !important;
+}
+
+.paginate_button {
+    background-color: #707070;
+}

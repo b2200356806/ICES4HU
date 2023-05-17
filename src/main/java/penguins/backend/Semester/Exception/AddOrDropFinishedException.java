@@ -1,4 +1,4 @@
-package penguins.backend.Semester.SemesterException;
+package penguins.backend.Semester.Exception;
 
 public class AddOrDropFinishedException extends RuntimeException {
     public AddOrDropFinishedException(String message) {

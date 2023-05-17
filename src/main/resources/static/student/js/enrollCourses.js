@@ -35,14 +35,14 @@ xmlhttp.onload = function() {
     let text = "<table border='2'>"
     for (let x in myObj) {
         text += "<tr><td>" + myObj[x].name + "</td>";
-        text += "<td>" + myObj[x].department + "</td>";
+        text += "<td>" + myObj[x].department.name + "</td>";
         text += "<td>" + myObj[x].courseCode + "</td>";
         text += "<td>" + "<input type='checkbox'>" + "</td></tr>";
     }
     text += "</table>"
     document.getElementById("available").innerHTML = text;
 }
-xmlhttp.open("GET", "http://localhost:8080//api/admin/1/courses");
+xmlhttp.open("GET", "http://localhost:8080/api/admin/1/courses");
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send(dbParam);
 
@@ -82,7 +82,7 @@ myxmlhttp.onload = function() {
     let mytext = "<table border='2'>"
     for (let x in myObj2) {
         mytext += "<tr><td>" + myObj2[x].name + "</td>";
-        mytext += "<td>" + myObj2[x].department + "</td>";
+        mytext += "<td>" + myObj2[x].department.name + "</td>";
         mytext += "<td>" + myObj2[x].courseCode + "</td>";
         mytext += "<td>" + "<input type='checkbox'</input>" + "</td></tr>";
     }

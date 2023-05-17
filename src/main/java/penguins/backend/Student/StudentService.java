@@ -9,8 +9,8 @@ import penguins.backend.Evaluation.EvaluationException.CourseAlreadyEvaluatedExc
 import penguins.backend.Evaluation.EvaluationForm.EvaluationForm;
 import penguins.backend.Evaluation.EvaluationForm.EvaluationFormService;
 import penguins.backend.Evaluation.EvaluationResponse.EvaluationResponseDto;
-import penguins.backend.Semester.SemesterException.AddOrDropFinishedException;
-import penguins.backend.Semester.SemesterException.EvaluationNotStartedException;
+import penguins.backend.Semester.Exception.AddOrDropFinishedException;
+import penguins.backend.Semester.Exception.EvaluationNotStartedException;
 import penguins.backend.Semester.Exception.SemesterNotStartedException;
 import penguins.backend.User.Exception.UserNotFoundException;
 import penguins.backend.Semester.Semester;
