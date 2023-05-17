@@ -85,7 +85,7 @@ public class StudentService {
      * @throws SemesterNotStartedException if the semester is not started yet
      */
     public List<Course> enroll(long userId, String courseCode)
-            throws UserNotFoundException, CourseNotFoundException, SemesterNotStartedException {
+            throws UserNotFoundException, CourseNotFoundException, SemesterNotStartedException, AddOrDropFinishedException {
 
         if (!Semester.isSemesterStarted()) throw new SemesterNotStartedException("Semester is not started yet");
         if (!Semester.isAddOrDropStarted()) throw new AddOrDropFinishedException("Add/Drop is finished or not started yet");
