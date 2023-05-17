@@ -121,6 +121,20 @@ public class DepartmentService {
     }
 
 
+    public Department getOrCreateDepartment(String departmentName) {
+        Department department = departmentRepository.findByName(departmentName).orElse(null);
+
+        if (department == null) {
+            department = new Department();
+            department.setName(departmentName);
+            department.setDefaultEvaluationQuestions(new ArrayList<>());
+            departmentRepository.save(department);
+        }
+
+        return department;
+    }
+
+
     /**
      * Updates a department in the database
      * @param department department object with updated attributes
