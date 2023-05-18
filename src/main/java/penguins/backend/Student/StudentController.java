@@ -89,7 +89,7 @@ public class StudentController {
             return ResponseEntity.ok(courses);
         } catch (UserNotFoundException | CourseNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (SemesterNotStartedException e) {
+        } catch (SemesterNotStartedException | AddOrDropFinishedException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
@@ -108,7 +108,7 @@ public class StudentController {
             return ResponseEntity.ok(courses);
         } catch (UserNotFoundException | CourseNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (AddOrDropFinishedException e) {
+        } catch (SemesterNotStartedException | AddOrDropFinishedException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
@@ -130,6 +130,23 @@ public class StudentController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
+
+    /**
+     * Gets an evaluationForm with the given id.
+     * @param evaluationFormId evaluation form id
+     * @return EvaluationForm with the given id.
+     */
+    @GetMapping(path = "/evaluation/{evaluationFormId}")
+    public ResponseEntity<?> getEvaluationFormForCourse(@PathVariable long evaluationFormId) {
+        try {
+            EvaluationForm output = studentService.getEvaluationForm(evaluationFormId);
+            return ResponseEntity.ok(output);
+        } catch (EvaluationNotStartedException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
 
 
     /**

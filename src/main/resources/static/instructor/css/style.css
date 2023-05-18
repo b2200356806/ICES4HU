@@ -101,3 +101,13 @@ body{
 #img-upload {
     width: 10%;
 }
+
+/* survey preview */
+
+.survey-background{
+    border-style: solid;
+    border-color: whitesmoke;
+    border-radius: 25px;
+    text-align: center;
+}
+

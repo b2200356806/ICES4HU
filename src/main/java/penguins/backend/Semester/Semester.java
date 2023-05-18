@@ -47,7 +47,7 @@ public class Semester {
      * @return true if the add or drop is started, false otherwise
      */
     public static boolean isAddOrDropStarted() {
-        return addOrDropStarted;
+        return addOrDropStarted && semesterStarted;
     }
 
 

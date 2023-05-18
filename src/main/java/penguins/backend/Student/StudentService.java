@@ -85,9 +85,10 @@ public class StudentService {
      * @throws SemesterNotStartedException if the semester is not started yet
      */
     public List<Course> enroll(long userId, String courseCode)
-            throws UserNotFoundException, CourseNotFoundException, SemesterNotStartedException {
+            throws UserNotFoundException, CourseNotFoundException, SemesterNotStartedException, AddOrDropFinishedException {
 
         if (!Semester.isSemesterStarted()) throw new SemesterNotStartedException("Semester is not started yet");
+        if (!Semester.isAddOrDropStarted()) throw new AddOrDropFinishedException("Add/Drop is finished or not started yet");
 
         Student student = getStudentById(userId);
         Course course = courseService.getCourseByCourseCode(courseCode);
@@ -112,7 +113,8 @@ public class StudentService {
     public List<Course> drop(long userId, String courseCode)
             throws UserNotFoundException, CourseNotFoundException, SemesterNotStartedException, AddOrDropFinishedException {
 
-        if (!Semester.isAddOrDropStarted()) throw new AddOrDropFinishedException("Add/Drop is finished");
+        if (!Semester.isSemesterStarted()) throw new SemesterNotStartedException("Semester is not started yet");
+        if (!Semester.isAddOrDropStarted()) throw new AddOrDropFinishedException("Add/Drop is finished or not started yet");
 
         Student student = getStudentById(userId);
         Course course = courseService.getCourseByCourseCode(courseCode);
@@ -146,6 +148,20 @@ public class StudentService {
             if (e != null) evaluationForms.add(e);
         }
         return evaluationForms;
+    }
+
+
+    /**
+     * Gets evaluationForm with the given id
+     * @param formId evaluation form id
+     * @return EvaluationForm with the given id
+     * @throws EvaluationNotStartedException if the evaluation is not started yet
+     */
+    public EvaluationForm getEvaluationForm(long formId) throws EvaluationNotStartedException {
+        if (!Semester.isEvaluationStarted()) {
+            throw new EvaluationNotStartedException("Evaluation is not started yet.");
+        }
+        return evaluationFormService.getEvaluationForm(formId);
     }
 
 

@@ -31,7 +31,7 @@ $("#courseTable").on('change', 'input[type="checkbox"]' , function () {
 const dbParam = JSON.stringify();
 const xmlhttp = new XMLHttpRequest();
 xmlhttp.onload = function() {
-    myObj = JSON.parse(this.responseText);
+    let myObj = JSON.parse(this.responseText);
     let text = "<table border='2'>"
     for (let x in myObj) {
         text += "<tr><td>" + myObj[x].name + "</td>";
@@ -78,7 +78,7 @@ $("#myTable").on('change', 'input[type="checkbox"]' , function () {
 const mydbParam = JSON.stringify();
 const myxmlhttp = new XMLHttpRequest();
 myxmlhttp.onload = function() {
-    myObj2 = JSON.parse(this.responseText);
+    let myObj2 = JSON.parse(this.responseText);
     let mytext = "<table border='2'>"
     for (let x in myObj2) {
         mytext += "<tr><td>" + myObj2[x].name + "</td>";

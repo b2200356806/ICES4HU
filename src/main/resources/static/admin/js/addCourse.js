@@ -13,12 +13,19 @@ form.onsubmit = function(event)
     var xhr = new XMLHttpRequest();
     var formData = new FormData(form);
     //open the request
-    xhr.open('POST','http://localhost:8080/api/admin/courses/add')
+    xhr.open('POST','http://localhost:8080/api/admin/1/courses/add')
     xhr.setRequestHeader("Content-Type", "application/json");
-    console.log(Object.fromEntries(formData))
+
+    let courseAdded = {
+        courseCode: formData.get("courseCode"),
+        name: formData.get("name"),
+        department: {
+            name: formData.get("department")
+        }
+    };
 
     //send the form data
-    xhr.send(JSON.stringify(Object.fromEntries(formData)));
+    xhr.send(JSON.stringify(courseAdded));
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -51,7 +58,7 @@ $("#courseTable").on('change', 'input[type="checkbox"]' , function () {
 const mydbParam = JSON.stringify();
 const myxmlhttp = new XMLHttpRequest();
 myxmlhttp.onload = function() {
-    myObj2 = JSON.parse(this.responseText);
+    let myObj2 = JSON.parse(this.responseText);
     let mytext = "<table border='2'>"
     for (let x in myObj2) {
         mytext += "<tr><td>" + myObj2[x].name + "</td>";

@@ -2,10 +2,10 @@
 const dbParam = JSON.stringify();
 const xmlhttp = new XMLHttpRequest();
 xmlhttp.onload = function () {
-    myObj = JSON.parse(this.responseText);
+    let myObj = JSON.parse(this.responseText);
     let text = "";
     for (let x in myObj) {
-        text += "<option>" + myObj[x].userId + " - " + myObj[x].firstName + " " + myObj[x].lastName + "</option>";
+        text += `<option value="${myObj[x].userId}">` + myObj[x].firstName + " " + myObj[x].lastName + "</option>";
     }
     document.getElementById("inst").innerHTML = text;
 }
@@ -18,10 +18,10 @@ xmlhttp.send(dbParam);
 const dbParam2 = JSON.stringify();
 const xmlhttp2 = new XMLHttpRequest();
 xmlhttp2.onload = function () {
-    myObj = JSON.parse(this.responseText);
+    let myObj = JSON.parse(this.responseText);
     let text = "";
     for (let x in myObj) {
-        text += "<option>" + myObj[x].courseCode + " - " + myObj[x].name + "</option>";
+        text += `<option value="${myObj[x].courseCode}">` + myObj[x].courseCode + " - " + myObj[x].name + "</option>";
     }
     document.getElementById("course").innerHTML = text;
 }
@@ -39,12 +39,12 @@ form.onsubmit = function (event) {
     //Select course code from dropdown
     var courses = document.getElementById("course").options;
     var selectedCourse = document.getElementById("course").selectedIndex;
-    let selectCode = courses[selectedCourse].value.split("-")[0].trim()
+    let selectCode = courses[selectedCourse].value
 
     //Select instructor id from dropdown
     var instructors = document.getElementById("inst").options;
     var selectedInstructor = document.getElementById("inst").selectedIndex;
-    let selectId = instructors[selectedInstructor].value.split("-")[0].trim()
+    let selectId = instructors[selectedInstructor].value
 
     //open the request
     xhr.open('POST', 'http://localhost:8080/api/department-managers/500/assign/' + selectCode)

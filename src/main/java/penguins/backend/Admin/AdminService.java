@@ -9,6 +9,7 @@ import penguins.backend.Course.CourseType;
 import penguins.backend.Course.Exception.CourseAlreadyExistsException;
 import penguins.backend.Course.Exception.CourseNotFoundException;
 import penguins.backend.Department.Department;
+import penguins.backend.Department.DepartmentService;
 import penguins.backend.DepartmentManager.DepartmentManager;
 import penguins.backend.DepartmentManager.DepartmentManagerRepository;
 import penguins.backend.Instructor.Instructor;
@@ -33,6 +34,7 @@ public class AdminService {
     private final CourseService courseService;
     private final UserService userService;
     private final StudentService studentService;
+    private final DepartmentService departmentService;
 
     /* Used for addExamplesToDatabase() method */
     @Autowired
@@ -47,11 +49,12 @@ public class AdminService {
     private UserRepository userRepository;
 
     public AdminService(AdminRepository adminRepository, CourseService courseService, UserService userService,
-                        StudentService studentService) {
+                        StudentService studentService, DepartmentService departmentService) {
         this.adminRepository = adminRepository;
         this.courseService = courseService;
         this.userService = userService;
         this.studentService = studentService;
+        this.departmentService = departmentService;
     }
 
 
@@ -71,6 +74,8 @@ public class AdminService {
      * @throws CourseAlreadyExistsException if there is another course in the database with the same course code
      */
     public Course addCourse(Course course) throws CourseAlreadyExistsException {
+        Department department = departmentService.getOrCreateDepartment(course.getDepartment().getName());
+        course.setDepartment(department);
         return courseService.addCourse(course);
     }
 
@@ -187,6 +192,7 @@ public class AdminService {
 
         Department computerEngineering = new Department();
         computerEngineering.setName("Computer Engineering");
+        computerEngineering.setId(10);
 
         DepartmentManager departmentManager = new DepartmentManager();
         departmentManager.setFirstName("Department Manager Firstname");
@@ -211,6 +217,17 @@ public class AdminService {
         instructorRepository.save(instructor);
         userRepository.save(instructor);
 
+        Instructor instructor2 = new Instructor();
+        instructor2.setFirstName("Teacher Firstname");
+        instructor2.setLastName("Teacher Lastname");
+        instructor2.setDepartment(computerEngineering);
+        instructor2.setCourses(new ArrayList<>());
+        instructor2.setUsername("teacher-username");
+        instructor2.setPassword("teacher-password");
+        instructor2.setUserId(502);
+        instructorRepository.save(instructor2);
+        userRepository.save(instructor2);
+
 
         /* Create 10 students */
         for (int i = 1; i < 11; i++) {
@@ -228,8 +245,8 @@ public class AdminService {
             userRepository.save(student);
         }
 
-        /* Create 99 courses */
-        for (int i = 300; i < 400; i++) {
+        /* Create 50 courses */
+        for (int i = 300; i < 350; i++) {
             Course course = new Course();
             course.setId(i);
             course.setCourseCode("BBM" + i);
