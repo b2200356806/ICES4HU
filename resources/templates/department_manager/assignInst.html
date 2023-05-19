@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/department_manager/css/style.css">
+    <title>Assign Instructors</title>
+</head>
+
+<body>
+<!--Navigation bar-->
+<div th:replace="department_manager/fragments/nav.html"></div>
+<!--end of Navigation bar-->
+
+<div class="container-fluid text-left text-white page-position">
+    <div class="page-background">
+        <h1>Assign Instructors</h1>
+        <form id="assignInstForm">
+            <div class="form-group">
+                <label for="course">Select Course</label>
+                <select class="form-control" id="course">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="inst">Select Instructor</label>
+                <select class="form-control" id="inst">
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" id="assign-btn" style="margin-top: 2%;">Assign</button>
+        </form>
+    </div>
+</div>
+
+<script src="/department_manager/js/assignInst.js"></script>
+</body>
+
+</html>

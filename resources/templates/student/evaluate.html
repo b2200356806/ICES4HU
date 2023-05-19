@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/student/css/style.css">
+    <title>Home Page</title>
+</head>
+<body>
+<!--Navigation bar-->
+<div th:replace="student/fragments/nav.html"></div>
+<!--end of Navigation bar-->
+
+<div class="container-fluid text-left text-white page-position">
+    <div class="page-background">
+        <h1>Evaluate Courses/Instructors</h1>
+        <form>
+            <div class="form-group">
+                <label for="course">Select Course</label>
+                <select class="form-control" id="course" onchange="selectEval()">
+                </select>
+            </div>
+        </form>
+        <hr>
+        <!-- Survey -->
+        <div class="survey-form" id="preview">
+<!--            <div class="mx-0 mx-sm-auto">-->
+<!--                <div class="text-center">-->
+<!--                    <p>-->
+<!--                        <strong>How do you rate customer support</strong>-->
+<!--                    </p>-->
+<!--                </div>-->
+
+<!--                <div class="text-center mb-3">-->
+<!--                    <div class="d-inline mx-3">-->
+<!--                        Bad-->
+<!--                    </div>-->
+
+<!--                    <div class="form-check form-check-inline">-->
+<!--                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"-->
+<!--                               value="option1"/>-->
+<!--                        <label class="form-check-label" for="inlineRadio1">1</label>-->
+<!--                    </div>-->
+
+<!--                    <div class="form-check form-check-inline">-->
+<!--                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"-->
+<!--                               value="option2"/>-->
+<!--                        <label class="form-check-label" for="inlineRadio2">2</label>-->
+<!--                    </div>-->
+
+<!--                    <div class="form-check form-check-inline">-->
+<!--                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"-->
+<!--                               value="option3"/>-->
+<!--                        <label class="form-check-label" for="inlineRadio3">3</label>-->
+<!--                    </div>-->
+
+<!--                    <div class="form-check form-check-inline">-->
+<!--                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4"-->
+<!--                               value="option4"/>-->
+<!--                        <label class="form-check-label" for="inlineRadio4">4</label>-->
+<!--                    </div>-->
+
+<!--                    <div class="form-check form-check-inline">-->
+<!--                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5"-->
+<!--                               value="option5"/>-->
+<!--                        <label class="form-check-label" for="inlineRadio5">5</label>-->
+<!--                    </div>-->
+<!--                    <div class="d-inline me-4">-->
+<!--                        Excellent-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="text-end">-->
+<!--                    <button type="button" class="btn btn-primary">Submit</button>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="/student/js/evaluate.js"></script>
+
+</html>
