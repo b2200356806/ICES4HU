@@ -15,6 +15,7 @@ However, to send an object without such note, you need to send all the attribute
 ### Admin
 | Description                 | Method | RequestBody        | Endpoint                                                 | Notes                    |
 | :---------------------------| :------| :------------------| :--------------------------------------------------------| :----------------------- |
+| Get account info            | GET    |                    | /api/admin/{user_id}/                                    ||
 | Get all courses             | GET    |                    | /api/admin/{user_id}/courses                             ||
 | Add a course                | POST   | Course             | /api/admin/{user_id}/courses/add                         |For department object in the course object, the department.name attribute is required|
 | Remove a course             | POST   | Course             | /api/admin/{user_id}/courses/remove                      |Only courseCode attribute is required in the requestBody|
