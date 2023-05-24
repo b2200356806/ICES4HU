@@ -21,6 +21,24 @@ public class AdminController {
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
+    
+    
+     /**
+     * Finds the admin with the given id.
+     * @param userId user id of the admin
+     * @return ResponseEntity containing the AdminDto with the given id if it exists
+     */
+    @GetMapping(path = "")
+    public ResponseEntity<?> getAdminByUserId(@PathVariable long userId) {
+        try {
+            Admin admin = adminService.getAdminByUserId(userId);
+            AdminDto adminDto = adminToAdminDto(admin);
+            return ResponseEntity.ok(adminDto);
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Admin not found");
+        }
+    }
+
 
     /**
      * Returns a list of courses in the database.
