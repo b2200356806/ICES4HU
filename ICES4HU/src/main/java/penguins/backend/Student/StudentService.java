@@ -2,24 +2,44 @@ package penguins.backend.Student;
 
 import org.springframework.stereotype.Service;
 import penguins.backend.Course.Course;
-import penguins.backend.Course.CourseRepository;
-import penguins.backend.Course.Exception.CourseNotFoundException;
-import penguins.backend.Semester.Exception.SemesterNotStartedException;
-import penguins.backend.Semester.Exception.SemesterOngoingException;
-import penguins.backend.User.Exception.UserNotFoundException;
+import penguins.backend.Course.CourseException.CourseNotFoundException;
+import penguins.backend.Course.CourseService;
+import penguins.backend.Evaluation.CourseEvaluation.CourseEvaluationService;
+import penguins.backend.Evaluation.EvaluationException.CourseAlreadyEvaluatedException;
+import penguins.backend.Evaluation.EvaluationForm.EvaluationForm;
+import penguins.backend.Evaluation.EvaluationForm.EvaluationFormService;
+import penguins.backend.Evaluation.EvaluationResponse.EvaluationResponseDto;
+import penguins.backend.Semester.SemesterException.AddOrDropFinishedException;
+import penguins.backend.Semester.SemesterException.EvaluationNotStartedException;
+import penguins.backend.Semester.SemesterException.SemesterNotStartedException;
+import penguins.backend.User.UserException.UserNotFoundException;
 import penguins.backend.Semester.Semester;
+import penguins.backend.User.UserService;
+import penguins.backend.User.UserUpdateRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class StudentService {
-    private final StudentRepository studentRepository;
-    private final CourseRepository courseRepository;
 
-    public StudentService(StudentRepository studentRepository, CourseRepository courseRepository) {
+
+    private final StudentRepository studentRepository;
+    private final CourseService courseService;
+    private final EvaluationFormService evaluationFormService;
+    private final CourseEvaluationService courseEvaluationService;
+    private final UserService userService;
+
+    public StudentService(StudentRepository studentRepository,
+                          CourseService courseService,
+                          EvaluationFormService evaluationFormService,
+                          CourseEvaluationService courseEvaluationService,
+                          UserService userService) {
         this.studentRepository = studentRepository;
-        this.courseRepository = courseRepository;
+        this.courseService = courseService;
+        this.evaluationFormService = evaluationFormService;
+        this.courseEvaluationService = courseEvaluationService;
+        this.userService = userService;
     }
 
 
@@ -64,19 +84,20 @@ public class StudentService {
      * @throws CourseNotFoundException if there is no course with the given course code
      * @throws SemesterNotStartedException if the semester is not started yet
      */
-    public Student enroll(long userId, String courseCode)
-            throws UserNotFoundException, CourseNotFoundException, SemesterNotStartedException {
+    public List<Course> enroll(long userId, String courseCode)
+            throws UserNotFoundException, CourseNotFoundException, SemesterNotStartedException, AddOrDropFinishedException {
 
-        if (!Semester.isStarted()) throw new SemesterNotStartedException("Semester is not started yet");
+        if (!Semester.isSemesterStarted()) throw new SemesterNotStartedException("Semester is not started yet");
+        if (!Semester.isAddOrDropStarted()) throw new AddOrDropFinishedException("Add/Drop is finished or not started yet");
 
         Student student = getStudentById(userId);
-        Course course = courseRepository.findByCourseCode(courseCode).orElseThrow(() -> new CourseNotFoundException("Course not found. CourseCode: " + courseCode));
+        Course course = courseService.getCourseByCourseCode(courseCode);
 
         if (!student.getCourses().contains(course)) {
             student.getCourses().add(course);
             updateStudent(student);
         }
-        return student;
+        return student.getCourses();
     }
 
 
@@ -89,40 +110,105 @@ public class StudentService {
      * @throws CourseNotFoundException if there is no course with the given course code.
      * @throws SemesterNotStartedException if the semester is not started yet
      */
-    public Student drop(long userId, String courseCode)
-            throws UserNotFoundException, CourseNotFoundException, SemesterNotStartedException {
+    public List<Course> drop(long userId, String courseCode)
+            throws UserNotFoundException, CourseNotFoundException, SemesterNotStartedException, AddOrDropFinishedException {
 
-        if (Semester.isStarted()) throw new SemesterOngoingException("Semester is still ongoing");
+        if (!Semester.isSemesterStarted()) throw new SemesterNotStartedException("Semester is not started yet");
+        if (!Semester.isAddOrDropStarted()) throw new AddOrDropFinishedException("Add/Drop is finished or not started yet");
 
         Student student = getStudentById(userId);
-        Course course = courseRepository.findByCourseCode(courseCode).orElseThrow(() -> new CourseNotFoundException("Course not found. CourseCode: " + courseCode));
+        Course course = courseService.getCourseByCourseCode(courseCode);
 
         if (student.getCourses().contains(course)) {
             student.getCourses().remove(course);
             updateStudent(student);
         }
 
+        return student.getCourses();
+    }
+
+
+    /**
+     * Gets evaluationForms that are not null for the courses taken by the student.
+     * @param userId student user id
+     * @return EvaluationForms for the courses of the student
+     * @throws UserNotFoundException if there is no student with the given id
+     * @throws EvaluationNotStartedException if the evaluation is not started yet
+     */
+    public List<EvaluationForm> getEvaluationForms(long userId) throws UserNotFoundException, EvaluationNotStartedException {
+        if (!Semester.isEvaluationStarted()) {
+            throw new EvaluationNotStartedException("Evaluation is not started yet.");
+        }
+
+        Student student = getStudentById(userId);
+
+        List<EvaluationForm> evaluationForms = new ArrayList<>();
+        for (Course course : student.getCourses()) {
+            EvaluationForm e = evaluationFormService.getEvaluationForm(course);
+            if (e != null) evaluationForms.add(e);
+        }
+        return evaluationForms;
+    }
+
+    
+    /**
+     * Gets evaluationForm with the given id
+     * @param formId evaluation form id
+     * @return EvaluationForm with the given id
+     * @throws EvaluationNotStartedException if the evaluation is not started yet
+     */
+    public EvaluationForm getEvaluationForm(long formId) throws EvaluationNotStartedException {
+        if (!Semester.isEvaluationStarted()) {
+            throw new EvaluationNotStartedException("Evaluation is not started yet.");
+        }
+        return evaluationFormService.getEvaluationForm(formId);
+    }
+
+
+    /**
+     * Evaluates a course and sets the responses
+     * @param userId student user id
+     * @param courseCode course code
+     * @param responses Responses given by the student
+     * @throws UserNotFoundException if there is no student with the given id
+     * @throws CourseNotFoundException if there is no course with the given course code
+     */
+    public void evaluate(long userId, String courseCode, List<EvaluationResponseDto> responses)
+            throws UserNotFoundException, CourseNotFoundException, CourseAlreadyEvaluatedException {
+        Student student = getStudentById(userId);
+        Course course = courseService.getCourseByCourseCode(courseCode);
+        courseEvaluationService.evaluate(student, course, responses);
+    }
+
+
+    /**
+     * Updates the attributes of the user
+     * @param userId student user id
+     * @param userUpdateRequest updated user attributes
+     * @return updated student
+     */
+    public Student updateStudent(long userId, UserUpdateRequest userUpdateRequest) throws UserNotFoundException {
+        Student student = getStudentById(userId);
+        userService.updateUser(student, userUpdateRequest);
+        studentRepository.save(student);
         return student;
     }
 
 
     /**
-     * Drops all the courses taken by the student.
-     * @param userId user id of the student
-     * @return the updated student with an empty list of courses
+     * Admits the student.
+     * @param userId student user id
+     * @param admit true to admit, false to reject
+     * @return updated student
      * @throws UserNotFoundException if there is no student with the given id
-     * @throws SemesterOngoingException if the semester is still ongoing
      */
-    public Student dropAllCourses(long userId) throws UserNotFoundException, SemesterOngoingException {
-        if (Semester.isStarted()) {
-            throw new SemesterOngoingException("The semester is still ongoing.");
-        }
+    public Boolean admitStudent(long userId, boolean admit) throws UserNotFoundException {
         Student student = getStudentById(userId);
-        student.setCourses(new ArrayList<>());
-        return updateStudent(student);
+        student.setAccountRegistered(admit);
+        updateStudent(student);
+        userService.saveUser(student);
+        return student.isAccountRegistered();
     }
-
-
 
 
     /**
@@ -131,7 +217,9 @@ public class StudentService {
      * @return Updated student
      */
     private Student updateStudent(Student student) {
-        return studentRepository.save(student);
+        studentRepository.save(student);
+        userService.saveUser(student);
+        return student;
     }
 
 
