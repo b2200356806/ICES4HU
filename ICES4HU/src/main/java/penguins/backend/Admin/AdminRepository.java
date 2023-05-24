@@ -10,7 +10,7 @@ import java.util.Optional;
 public class AdminRepository {
     private final List<Admin> admins = new ArrayList<>();
 
-    public Optional<Admin> findByUserId(long userId) {
+    public Optional<Admin> findById(long userId) {
         for (Admin admin : admins) {
             if (admin.getUserId() == userId) {
                 return Optional.of(admin);
