@@ -181,8 +181,8 @@ public class AdminService {
      * @return the admin with the given user id
      * @throws UserNotFoundException if there is no admin with the given user id
      */
-    private Admin getAdminByUserId(long userId) throws UserNotFoundException {
-        return adminRepository.findByUserId(userId)
+    public Admin getAdminByUserId(long userId) throws UserNotFoundException {
+        return adminRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("Admin not found. User id: " + userId));
     }
 
