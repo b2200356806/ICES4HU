@@ -8,6 +8,7 @@ import penguins.backend.Department.DepartmentException.DifferentDepartmentExcept
 import penguins.backend.Department.DepartmentService;
 import penguins.backend.Evaluation.EvaluationQuestion.EvaluationQuestion;
 import penguins.backend.Instructor.Instructor;
+import penguins.backend.Instructor.InstructorService;
 import penguins.backend.User.UserException.UserNotFoundException;
 import penguins.backend.User.UserService;
 import penguins.backend.User.UserUpdateRequest;
@@ -19,14 +20,15 @@ public class DepartmentManagerService {
     private final DepartmentManagerRepository departmentManagerRepository;
     private final DepartmentService departmentService;
     private final UserService userService;
-
+    private final InstructorService instructorService;
 
     public DepartmentManagerService(DepartmentManagerRepository departmentManagerRepository,
                                     DepartmentService departmentService,
-                                    UserService userService) {
+                                    UserService userService, InstructorService instructorService) {
         this.departmentManagerRepository = departmentManagerRepository;
         this.departmentService = departmentService;
         this.userService = userService;
+        this.instructorService = instructorService;
     }
 
 
@@ -146,7 +148,20 @@ public class DepartmentManagerService {
      * @return the saved department manager
      */
     public DepartmentManager saveDepartmentManager(DepartmentManager departmentManager) {
+        userService.saveUser(departmentManager);
         return departmentManagerRepository.save(departmentManager);
+    }
+
+
+    /**
+     * Finds the instructor user id based on the department manager user id
+     * @param departmentManagerId department manager user id
+     * @return instructor user id
+     * @throws UserNotFoundException if there is no user with the given information
+     */
+    public long getInstructorId(long departmentManagerId) throws UserNotFoundException {
+        DepartmentManager departmentManager = getDepartmentManager(departmentManagerId);
+        return instructorService.findInstructorByUsername(departmentManager.getUsername()).getUserId();
     }
 
 }
