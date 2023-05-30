@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,33 +10,74 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/admin/css/style.css">
-    <title>Add Course</title>
-</head>
-<body>
-    <!--Navigation bar-->
-    <div th:replace="admin/fragments/nav.html"></div>
-    <!--end of Navigation bar-->
 
-    <div class="container-fluid text-left text-white page-position">
-        <div class="page-background">
-            <h1>Add Course</h1>
-            <form id="addCourseForm">
-                <div class="form-group mb-3">
-                    <label for="courseCode">Course ID</label>
-                    <input type="text" class="form-control" id="courseCode" name="courseCode" pattern="[A-Z]{3}[0-9]{3}" required>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+    <link href="/notifications/css/notifications.css" rel="stylesheet">
+
+    <title>Manage Courses</title>
+</head>
+
+<body>
+<!--Navigation bar-->
+<div th:replace="admin/fragments/nav.html"></div>
+<!--end of Navigation bar-->
+
+<div class="container-fluid text-left text-white page-position">
+    <div class="page-background">
+        <h1>Add Course</h1>
+        <form id="addCourseForm">
+            <div class="form-group mb-3">
+                <label for="courseCode">Course ID</label>
+                <input type="text" class="form-control" id="courseCode" name="courseCode" pattern="[A-Z]{3}[0-9]{3}"
+                       required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="name">Course Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="department">Department</label>
+                <input type="text" class="form-control" id="department" name="department" required>
+            </div>
+            <button type="submit" class="btn btn-primary" value="Submit">Add</button>
+        </form>
+        <hr>
+        <h1>Remove Course</h1>
+        <div>
+            <section class="intro">
+                <div class="h-100">
+                    <div class="mask d-flex align-items-center h-100">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-dark table-bordered mb-0" id="courseTable">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Course Name</th>
+                                                <th scope="col">Course Department</th>
+                                                <th scope="col">Course Code</th>
+                                                <th scope="col">Remove</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="available">
+                                            </tbody>
+                                        </table>
+                                        <input type="button" value="submit" onclick="RemoveSelected()"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="name">Course Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="department">Department</label>
-                    <input type="text" class="form-control" id="department" name="department" required>
-                </div>
-                <button type="submit" class="btn btn-primary" value="Submit">Add</button>
-            </form>
+            </section>
         </div>
     </div>
-    <script src="/admin/js/addCourse.js"></script>
+</div>
+<script src="/admin/js/addCourse.js"></script>
+<script src="/notifications/js/notifications.js"></script>
 </body>
 </html>
