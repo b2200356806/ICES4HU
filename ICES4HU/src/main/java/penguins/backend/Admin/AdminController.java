@@ -6,14 +6,16 @@ import org.springframework.web.bind.annotation.*;
 import penguins.backend.Course.Course;
 import penguins.backend.Course.CourseException.CourseAlreadyExistsException;
 import penguins.backend.Course.CourseException.CourseNotFoundException;
+import penguins.backend.Instructor.InstructorRegisterRequest;
 import penguins.backend.Semester.SemesterDto;
+import penguins.backend.User.UserException.UserExistsException;
 import penguins.backend.User.UserException.UserNotFoundException;
 import penguins.backend.User.UserUpdateRequest;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/{userId}")
+@RequestMapping("/api/admin/{UserId}")
 public class AdminController {
 
     private final AdminService adminService;
@@ -21,9 +23,8 @@ public class AdminController {
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
-    
-    
-     /**
+
+    /**
      * Finds the admin with the given id.
      * @param userId user id of the admin
      * @return ResponseEntity containing the AdminDto with the given id if it exists
@@ -69,7 +70,7 @@ public class AdminController {
 
     /**
      * Removes a course from the database.
-     * @param courseCode the course code of the course to remove from the database
+     * @param course the course code of the course to remove from the database
      * @return ResponseEntity indicating if the course was removed
      */
     @PostMapping(path = "/courses/remove")
@@ -207,6 +208,23 @@ public class AdminController {
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
         }
+    }
+
+
+    /**
+     * Creates an instructor/departmentManager
+     * @param instructorRegisterRequest the user register request
+     */
+    @PostMapping("/create-instructor")
+    public ResponseEntity<String> createInstructor(@RequestBody InstructorRegisterRequest instructorRegisterRequest) {
+
+        try {
+            adminService.createInstructor(instructorRegisterRequest);
+            return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
+        } catch (UserExistsException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
     }
 
 
