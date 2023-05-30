@@ -29,6 +29,7 @@ However, to send an object without such note, you need to send all the attribute
 | Update account info         | POST   | UserUpdateRequest  | /api/admin/{user_id}/update-info                         ||
 | Admit student               | POST   |                    | /api/admin/{user_id}/admit/{student_id}                  ||
 | Create first admin account  | POST   |                    | /api/admin/{user_id}/create-first-admin                  ||
+| Create instructor           | POST   | InstructorRegisterRequest | /api/admin/{user_id}/create-instructor            |For department object in the instructorRegisterRequest, the name attribute is required.|
 | Add some examples           | POST   |                    | /api/admin/{user_id}/add-examples                        ||
 
 ### Department Manager
