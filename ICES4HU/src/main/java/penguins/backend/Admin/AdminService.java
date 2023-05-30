@@ -218,8 +218,8 @@ public class AdminService {
             departmentManager.setUsername(username);
             departmentManager.setPassword(instructorRegisterRequest.getPassword());
             departmentManager.setCourses(instructorRegisterRequest.getCourses());
+            instructorService.saveInstructor(departmentManager);
             departmentManagerService.saveDepartmentManager(departmentManager);
-            userService.saveUser(departmentManager);
         } else {
             Instructor instructor = new Instructor();
             instructor.setDepartment(department);
@@ -229,7 +229,6 @@ public class AdminService {
             instructor.setPassword(instructorRegisterRequest.getPassword());
             instructor.setCourses(instructorRegisterRequest.getCourses());
             instructorService.saveInstructor(instructor);
-            userService.saveUser(instructor);
         }
     }
 
