@@ -183,9 +183,20 @@ public class InstructorService {
      * @return the saved instructor
      */
     public Instructor saveInstructor(Instructor instructor) {
+        userService.saveUser(instructor);
         return instructorRepository.save(instructor);
     }
 
+
+    /**
+     * Finds the instructor with username.
+     * @param username instructor username
+     * @return the instructor with the given username
+     */
+    public Instructor findInstructorByUsername(String username) {
+        return instructorRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("Instructor not found. Username: " + username));
+    }
 
 
 }
