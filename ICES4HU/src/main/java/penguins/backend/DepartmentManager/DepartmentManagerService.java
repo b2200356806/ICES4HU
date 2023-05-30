@@ -132,12 +132,21 @@ public class DepartmentManagerService {
      * @param userUpdateRequest updated user attributes
      * @return updated department manager
      */
-    public DepartmentManager updateStudent(long userId, UserUpdateRequest userUpdateRequest) throws UserNotFoundException {
+    public DepartmentManager updateDepartmentManager(long userId, UserUpdateRequest userUpdateRequest) throws UserNotFoundException {
         DepartmentManager departmentManager = getDepartmentManager(userId);
         userService.updateUser(departmentManager, userUpdateRequest);
         departmentManagerRepository.save(departmentManager);
         return departmentManager;
     }
 
+
+    /**
+     * Saves the department manager.
+     * @param departmentManager Department manager to save
+     * @return the saved department manager
+     */
+    public DepartmentManager saveDepartmentManager(DepartmentManager departmentManager) {
+        return departmentManagerRepository.save(departmentManager);
+    }
 
 }

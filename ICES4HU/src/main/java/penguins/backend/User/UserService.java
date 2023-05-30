@@ -50,4 +50,13 @@ public class UserService {
         userRepository.save(user);
     }
 
+
+    /**
+     * Finds if there is already a user with the given username.
+     * @param username username to check
+     * @return true if there is a user with the given username, false otherwise
+     */
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
 }

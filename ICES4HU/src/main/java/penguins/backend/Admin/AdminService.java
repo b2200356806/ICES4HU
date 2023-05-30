@@ -12,13 +12,17 @@ import penguins.backend.Department.Department;
 import penguins.backend.Department.DepartmentService;
 import penguins.backend.DepartmentManager.DepartmentManager;
 import penguins.backend.DepartmentManager.DepartmentManagerRepository;
+import penguins.backend.DepartmentManager.DepartmentManagerService;
 import penguins.backend.Instructor.Instructor;
+import penguins.backend.Instructor.InstructorRegisterRequest;
 import penguins.backend.Instructor.InstructorRepository;
+import penguins.backend.Instructor.InstructorService;
 import penguins.backend.Semester.Semester;
 import penguins.backend.Semester.SemesterDto;
 import penguins.backend.Student.Student;
 import penguins.backend.Student.StudentRepository;
 import penguins.backend.Student.StudentService;
+import penguins.backend.User.UserException.UserExistsException;
 import penguins.backend.User.UserException.UserNotFoundException;
 import penguins.backend.User.UserRepository;
 import penguins.backend.User.UserService;
@@ -35,6 +39,8 @@ public class AdminService {
     private final UserService userService;
     private final StudentService studentService;
     private final DepartmentService departmentService;
+    private final DepartmentManagerService departmentManagerService;
+    private final InstructorService instructorService;
 
     /* Used for addExamplesToDatabase() method */
     @Autowired
@@ -49,12 +55,15 @@ public class AdminService {
     private UserRepository userRepository;
 
     public AdminService(AdminRepository adminRepository, CourseService courseService, UserService userService,
-                        StudentService studentService, DepartmentService departmentService) {
+                        StudentService studentService, DepartmentService departmentService,
+                        DepartmentManagerService departmentManagerService, InstructorService instructorService) {
         this.adminRepository = adminRepository;
         this.courseService = courseService;
         this.userService = userService;
         this.studentService = studentService;
         this.departmentService = departmentService;
+        this.departmentManagerService = departmentManagerService;
+        this.instructorService = instructorService;
     }
 
 
@@ -184,6 +193,44 @@ public class AdminService {
     public Admin getAdminByUserId(long userId) throws UserNotFoundException {
         return adminRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("Admin not found. User id: " + userId));
+    }
+
+
+    /**
+     * Creates an instructor/departmentManager
+     * @param instructorRegisterRequest the user register request
+     */
+    public void createInstructor(InstructorRegisterRequest instructorRegisterRequest) throws UserExistsException {
+
+        String username = instructorRegisterRequest.getUsername();
+        if (userService.existsByUsername(username)) {
+            throw new UserExistsException("User exists with this username");
+        }
+
+        boolean isDepartmentManager = instructorRegisterRequest.isDepartmentManager();
+        Department department = departmentService.getOrCreateDepartment(instructorRegisterRequest.getDepartment().getName());
+
+        if (isDepartmentManager) {
+            DepartmentManager departmentManager = new DepartmentManager();
+            departmentManager.setDepartment(department);
+            departmentManager.setFirstName(instructorRegisterRequest.getFirstName());
+            departmentManager.setLastName(instructorRegisterRequest.getLastName());
+            departmentManager.setUsername(username);
+            departmentManager.setPassword(instructorRegisterRequest.getPassword());
+            departmentManager.setCourses(instructorRegisterRequest.getCourses());
+            departmentManagerService.saveDepartmentManager(departmentManager);
+            userService.saveUser(departmentManager);
+        } else {
+            Instructor instructor = new Instructor();
+            instructor.setDepartment(department);
+            instructor.setFirstName(instructorRegisterRequest.getFirstName());
+            instructor.setLastName(instructorRegisterRequest.getLastName());
+            instructor.setUsername(username);
+            instructor.setPassword(instructorRegisterRequest.getPassword());
+            instructor.setCourses(instructorRegisterRequest.getCourses());
+            instructorService.saveInstructor(instructor);
+            userService.saveUser(instructor);
+        }
     }
 
 

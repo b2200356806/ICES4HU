@@ -177,5 +177,15 @@ public class InstructorService {
         return instructor;
     }
 
+    /**
+     * Saves the instructor.
+     * @param instructor Instructor to save
+     * @return the saved instructor
+     */
+    public Instructor saveInstructor(Instructor instructor) {
+        return instructorRepository.save(instructor);
+    }
+
+
 
 }
