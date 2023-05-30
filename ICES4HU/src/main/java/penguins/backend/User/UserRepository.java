@@ -11,6 +11,15 @@ public class UserRepository {
 
     private final List<User> users = new ArrayList<>();
 
+    public boolean existsByUsername(String username) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Optional<User> findByUserId(long userId) {
         for (User user : users) {
             if (user.getUserId() == userId) {
