@@ -64,5 +64,4 @@ public class AppController {
 
     @GetMapping("/instructor/manageAccount")
     public String viewInsAcc() {return "instructor/manageAccount";}
-
 }
