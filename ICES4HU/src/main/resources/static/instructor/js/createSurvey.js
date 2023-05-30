@@ -99,9 +99,7 @@ function submitQuestion()
     var formData = new FormData(form);
     let selectId = getSelectID();
     let questions = formData.getAll("fields[]")
-    console.log(questions)
     questions = questions.filter((str) => str !== '');
-    console.log(questions)
 
     for (let x in questions) {
         let questionAdded = {

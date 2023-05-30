@@ -6,7 +6,6 @@ $(document).ready(function () {
 });
 
 
-
 var form = document.getElementById('addCourseForm');
 form.onsubmit = function(event)
 {
@@ -28,7 +27,7 @@ form.onsubmit = function(event)
     xhr.send(JSON.stringify(courseAdded));
 
     xhr.onreadystatechange = function() {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
             window.createNotification({
                 closeOnClick: true,
                 displayCloseButton: false,
