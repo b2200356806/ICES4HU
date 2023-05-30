@@ -156,9 +156,9 @@ public class DepartmentManagerController {
      * @return updated department manager
      */
     @PostMapping(path = "/update-info")
-    public ResponseEntity<?> updateStudent(@PathVariable long userId, @RequestBody UserUpdateRequest userUpdateRequest) {
+    public ResponseEntity<?> updateDepartmentManager(@PathVariable long userId, @RequestBody UserUpdateRequest userUpdateRequest) {
         try {
-            DepartmentManager departmentManager = departmentManagerService.updateStudent(userId, userUpdateRequest);
+            DepartmentManager departmentManager = departmentManagerService.updateDepartmentManager(userId, userUpdateRequest);
             DepartmentManagerDto departmentManagerDto = departmentManagerToDepartmentManagerDto(departmentManager);
             return ResponseEntity.ok(departmentManagerDto);
         } catch (UserNotFoundException e) {
