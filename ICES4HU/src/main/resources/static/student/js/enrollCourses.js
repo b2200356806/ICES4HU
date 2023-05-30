@@ -31,18 +31,18 @@ $("#courseTable").on('change', 'input[type="checkbox"]' , function () {
 const dbParam = JSON.stringify();
 const xmlhttp = new XMLHttpRequest();
 xmlhttp.onload = function() {
-    myObj = JSON.parse(this.responseText);
+    let myObj = JSON.parse(this.responseText);
     let text = "<table border='2'>"
     for (let x in myObj) {
         text += "<tr><td>" + myObj[x].name + "</td>";
-        text += "<td>" + myObj[x].department + "</td>";
+        text += "<td>" + myObj[x].department.name + "</td>";
         text += "<td>" + myObj[x].courseCode + "</td>";
         text += "<td>" + "<input type='checkbox'>" + "</td></tr>";
     }
     text += "</table>"
     document.getElementById("available").innerHTML = text;
 }
-xmlhttp.open("GET", "http://localhost:8080/api/courses/all");
+xmlhttp.open("GET", "http://localhost:8080/api/admin/1/courses");
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send(dbParam);
 
@@ -50,7 +50,7 @@ function GetSelected() {
     const codes = enrollCourses;
     for (let i in codes) {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8080/api/students/1/enroll/"+codes[i], false);
+        xhr.open("POST", "http://localhost:8080/api/students/1/courses/enroll/"+codes[i], false);
         xhr.send(null);
     }
     location.reload();
@@ -78,11 +78,11 @@ $("#myTable").on('change', 'input[type="checkbox"]' , function () {
 const mydbParam = JSON.stringify();
 const myxmlhttp = new XMLHttpRequest();
 myxmlhttp.onload = function() {
-    myObj2 = JSON.parse(this.responseText);
+    let myObj2 = JSON.parse(this.responseText);
     let mytext = "<table border='2'>"
     for (let x in myObj2) {
         mytext += "<tr><td>" + myObj2[x].name + "</td>";
-        mytext += "<td>" + myObj2[x].department + "</td>";
+        mytext += "<td>" + myObj2[x].department.name + "</td>";
         mytext += "<td>" + myObj2[x].courseCode + "</td>";
         mytext += "<td>" + "<input type='checkbox'</input>" + "</td></tr>";
     }
@@ -98,7 +98,7 @@ function DropSelected() {
     const codes = dropCourses;
     for (let i in codes) {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8080/api/students/1/drop/"+codes[i], false);
+        xhr.open("POST", "http://localhost:8080/api/students/1/courses/drop/"+codes[i], false);
         xhr.send(null);
     }
     location.reload();
