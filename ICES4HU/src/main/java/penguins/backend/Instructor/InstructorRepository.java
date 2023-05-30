@@ -11,6 +11,16 @@ import java.util.Optional;
 public class InstructorRepository {
     private final List<Instructor> instructors = new ArrayList<>();
 
+    public Optional<Instructor> findByUsername(String username) {
+        for (Instructor instructor : instructors) {
+            if (instructor.getUsername().equals(username)) {
+                return Optional.of(instructor);
+            }
+        }
+
+        return Optional.empty();
+    }
+
     public Optional<Instructor> findById(long userId) {
         for (Instructor instructor : instructors)
             if (instructor.getUserId() == userId)
