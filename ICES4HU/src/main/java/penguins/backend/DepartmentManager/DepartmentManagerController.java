@@ -167,6 +167,21 @@ public class DepartmentManagerController {
     }
 
 
+    /**
+     * Finds the instructor user id based on the department manager user id
+     * @param userId department manager user id
+     * @return ResponseEntity containing instructor user id
+     */
+    @GetMapping("/get-instructor-id")
+    public ResponseEntity<?> getInstructorId(@PathVariable long userId) {
+        try {
+            long output = departmentManagerService.getInstructorId(userId);
+            return ResponseEntity.ok(output);
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 
     /**
      * Converts a DepartmentManager object to a DepartmentManagerDto
