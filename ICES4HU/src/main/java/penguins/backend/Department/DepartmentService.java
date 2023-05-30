@@ -2,8 +2,8 @@ package penguins.backend.Department;
 
 import org.springframework.stereotype.Service;
 import penguins.backend.Course.Course;
-import penguins.backend.Course.Exception.CourseNotFoundException;
 import penguins.backend.Course.CourseService;
+import penguins.backend.Course.Exception.CourseNotFoundException;
 import penguins.backend.Department.DepartmentException.DifferentDepartmentException;
 import penguins.backend.Evaluation.EvaluationQuestion.EvaluationQuestion;
 import penguins.backend.Evaluation.EvaluationQuestion.EvaluationQuestionService;
@@ -35,11 +35,12 @@ public class DepartmentService {
 
     /**
      * Assigns an instructor to a course
-     * @param courseCode course code
+     *
+     * @param courseCode   course code
      * @param instructorId user id of the instructor
      * @return the updated course
      * @throws CourseNotFoundException if there is no course with the given course code
-     * @throws UserNotFoundException if there is no instructor with the given user id
+     * @throws UserNotFoundException   if there is no instructor with the given user id
      */
     public Course assignInstructor(Department department, String courseCode, long instructorId)
             throws CourseNotFoundException, UserNotFoundException, DifferentDepartmentException {
@@ -63,7 +64,8 @@ public class DepartmentService {
 
     /**
      * Adds a default evaluation question to the list of questions for the department
-     * @param department Department to add the evaluation question to
+     *
+     * @param department   Department to add the evaluation question to
      * @param questionText The new evaluation question
      * @return The updated list of evaluation questions for the department
      * @throws UserNotFoundException if there is no department manager with the given user id
@@ -79,9 +81,9 @@ public class DepartmentService {
     }
 
 
-
     /**
      * Removes a default evaluation question from the list of questions for the department
+     *
      * @param department Department to add the evaluation question to
      * @param questionId The evaluation question id
      * @return The updated list of evaluation questions for the department
@@ -101,6 +103,7 @@ public class DepartmentService {
 
     /**
      * Finds all instructors in the department
+     *
      * @param department department
      * @return list of all instructors in the department
      * @throws UserNotFoundException if there is no department manager with the given id
@@ -112,6 +115,7 @@ public class DepartmentService {
 
     /**
      * Finds all courses in the department
+     *
      * @param department department
      * @return list of all courses in the department
      * @throws UserNotFoundException if there is no department manager with the given id
@@ -137,6 +141,7 @@ public class DepartmentService {
 
     /**
      * Updates a department in the database
+     *
      * @param department department object with updated attributes
      * @return updated department
      */

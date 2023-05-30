@@ -8,6 +8,7 @@ public class Semester {
 
     /**
      * Indicates whether the semester is started.
+     *
      * @return true if the semester is started, false otherwise
      */
     public static boolean isSemesterStarted() {
@@ -17,6 +18,7 @@ public class Semester {
 
     /**
      * Starts and finishes the semester.
+     *
      * @param started true to start the semester, false otherwise
      */
     public static void setSemesterStarted(boolean started) {
@@ -26,6 +28,7 @@ public class Semester {
 
     /**
      * Indicates whether the evaluation is started.
+     *
      * @return true if the semester is started, false otherwise
      */
     public static boolean isEvaluationStarted() {
@@ -35,6 +38,7 @@ public class Semester {
 
     /**
      * Starts and finishes the evaluation.
+     *
      * @param started true to start the semester, false otherwise
      */
     public static void setEvaluationStarted(boolean started) {
@@ -44,6 +48,7 @@ public class Semester {
 
     /**
      * Indicates whether the add or drop is started.
+     *
      * @return true if the add or drop is started, false otherwise
      */
     public static boolean isAddOrDropStarted() {
@@ -53,6 +58,7 @@ public class Semester {
 
     /**
      * Starts and finishes the add or drop.
+     *
      * @param started true to start the add or drop, false otherwise
      */
     public static void setAddOrDropStarted(boolean started) {

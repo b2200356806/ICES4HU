@@ -1,5 +1,6 @@
 package penguins.backend.Instructor;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import penguins.backend.Course.Course;
 import penguins.backend.Department.Department;
@@ -14,5 +15,6 @@ public class InstructorRegisterRequest {
     private String password;
     private Department department;
     private List<Course> courses;
+    @JsonProperty("isDepartmentManager")
     private boolean isDepartmentManager;
 }

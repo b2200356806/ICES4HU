@@ -26,6 +26,7 @@ public class DepartmentManagerController {
 
     /**
      * Finds department manager with the given id.
+     *
      * @param userId user id
      * @return ResponseEntity containing the DepartmentManagerDto with the given id if it exists
      */
@@ -43,7 +44,8 @@ public class DepartmentManagerController {
 
     /**
      * Assigns an instructor to a course
-     * @param userId user id of the department manager
+     *
+     * @param userId     user id of the department manager
      * @param courseCode course code
      * @param instructor the instructor
      * @return the updated course
@@ -65,7 +67,8 @@ public class DepartmentManagerController {
 
     /**
      * Adds a default evaluation question to the list of questions for the department
-     * @param userId Department manager id
+     *
+     * @param userId             Department manager id
      * @param evaluationQuestion The new evaluation question with given text
      * @return The updated list of evaluation questions for the department
      */
@@ -84,7 +87,8 @@ public class DepartmentManagerController {
 
     /**
      * Removes a default evaluation question from the list of questions for the department
-     * @param userId Department manager id
+     *
+     * @param userId             Department manager id
      * @param evaluationQuestion The evaluation question with given id
      * @return The updated list of evaluation questions for the department
      */
@@ -103,6 +107,7 @@ public class DepartmentManagerController {
 
     /**
      * Finds all instructors in the department
+     *
      * @param userId department manager user id
      * @return List of instructors in the department
      */
@@ -119,6 +124,7 @@ public class DepartmentManagerController {
 
     /**
      * Finds all courses in the department
+     *
      * @param userId department manager user id
      * @return List of courses in the department
      */
@@ -135,6 +141,7 @@ public class DepartmentManagerController {
 
     /**
      * Finds the department information of the department manager
+     *
      * @param userId department manager user id
      * @return department object of the department manager
      */
@@ -151,7 +158,8 @@ public class DepartmentManagerController {
 
     /**
      * Updates the attributes of the user
-     * @param userId department manager user id
+     *
+     * @param userId            department manager user id
      * @param userUpdateRequest updated user attributes
      * @return updated department manager
      */
@@ -167,9 +175,26 @@ public class DepartmentManagerController {
     }
 
 
+    /**
+     * Finds the instructor user id based on the department manager user id
+     *
+     * @param userId department manager user id
+     * @return ResponseEntity containing instructor user id
+     */
+    @GetMapping("/get-instructor-id")
+    public ResponseEntity<?> getInstructorId(@PathVariable long userId) {
+        try {
+            long output = departmentManagerService.getInstructorId(userId);
+            return ResponseEntity.ok(output);
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 
     /**
      * Converts a DepartmentManager object to a DepartmentManagerDto
+     *
      * @param departmentManager departmentManager object
      * @return a DepartmentManagerDto object created based on the DepartmentManager object
      */

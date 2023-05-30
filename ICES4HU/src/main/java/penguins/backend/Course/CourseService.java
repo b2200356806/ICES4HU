@@ -19,6 +19,7 @@ public class CourseService {
 
     /**
      * Finds a list of all courses in the system.
+     *
      * @return a list of courses that are in the database
      */
     public List<Course> getAllCourses() {
@@ -28,6 +29,7 @@ public class CourseService {
 
     /**
      * Finds the course with the given course code.
+     *
      * @param courseCode course code
      * @return the course object with the given course code, if it exists
      * @throws CourseNotFoundException if there is no course with the given course code
@@ -39,6 +41,7 @@ public class CourseService {
 
     /**
      * Finds and returns the courses in the given department.
+     *
      * @param department course department
      * @return courses in the given department
      */
@@ -49,6 +52,7 @@ public class CourseService {
 
     /**
      * Adds a course to database if it doesn't already exist.
+     *
      * @param course the course object to add to the database
      * @return the course in the database
      * @throws CourseAlreadyExistsException if there is another course with the same course code
@@ -63,6 +67,7 @@ public class CourseService {
 
     /**
      * Removes the course with the given course code.
+     *
      * @param courseCode course code
      * @throws CourseNotFoundException if there is no course with the given course code
      */
@@ -78,6 +83,7 @@ public class CourseService {
 
     /**
      * Updates a course in the database.
+     *
      * @param course the course object with updated attributes
      * @return the updated course in the database
      * @throws CourseNotFoundException if there is no course to update with the given course code
@@ -88,5 +94,5 @@ public class CourseService {
         }
         return this.courseRepository.save(course);
     }
-    
+
 }

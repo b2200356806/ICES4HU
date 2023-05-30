@@ -8,6 +8,7 @@ import penguins.backend.Department.DepartmentException.DifferentDepartmentExcept
 import penguins.backend.Department.DepartmentService;
 import penguins.backend.Evaluation.EvaluationQuestion.EvaluationQuestion;
 import penguins.backend.Instructor.Instructor;
+import penguins.backend.Instructor.InstructorService;
 import penguins.backend.User.UserException.UserNotFoundException;
 import penguins.backend.User.UserService;
 import penguins.backend.User.UserUpdateRequest;
@@ -19,25 +20,27 @@ public class DepartmentManagerService {
     private final DepartmentManagerRepository departmentManagerRepository;
     private final DepartmentService departmentService;
     private final UserService userService;
-
+    private final InstructorService instructorService;
 
     public DepartmentManagerService(DepartmentManagerRepository departmentManagerRepository,
                                     DepartmentService departmentService,
-                                    UserService userService) {
+                                    UserService userService, InstructorService instructorService) {
         this.departmentManagerRepository = departmentManagerRepository;
         this.departmentService = departmentService;
         this.userService = userService;
+        this.instructorService = instructorService;
     }
 
 
     /**
      * Assigns an instructor to a course
+     *
      * @param departmentManagerUserId user id of the department manager
-     * @param courseCode course code
-     * @param instructorId user id of the instructor
+     * @param courseCode              course code
+     * @param instructorId            user id of the instructor
      * @return the updated course
-     * @throws CourseNotFoundException if there is no course with the given course code
-     * @throws UserNotFoundException if there is no instructor with the given user id
+     * @throws CourseNotFoundException      if there is no course with the given course code
+     * @throws UserNotFoundException        if there is no instructor with the given user id
      * @throws DifferentDepartmentException if department manager has a different department than the course or instructor
      */
     public Course assignInstructor(long departmentManagerUserId, String courseCode, long instructorId)
@@ -50,8 +53,9 @@ public class DepartmentManagerService {
 
     /**
      * Adds a default evaluation question to the list of questions for the department
+     *
      * @param departmentManagerId Department manager id
-     * @param questionText The new evaluation question
+     * @param questionText        The new evaluation question
      * @return The updated list of evaluation questions for the department
      * @throws UserNotFoundException if there is no department manager with the given user id
      */
@@ -64,8 +68,9 @@ public class DepartmentManagerService {
 
     /**
      * Removes a default evaluation question from the list of questions for the department
+     *
      * @param departmentManagerId Department manager id
-     * @param questionId The evaluation question id
+     * @param questionId          The evaluation question id
      * @return The updated list of evaluation questions for the department
      * @throws UserNotFoundException if there is no department manager with the given user id
      */
@@ -78,6 +83,7 @@ public class DepartmentManagerService {
 
     /**
      * Finds all instructors in the department
+     *
      * @param departmentManagerId department manager id
      * @return list of all instructors in the department
      * @throws UserNotFoundException if there is no department manager with the given id
@@ -90,6 +96,7 @@ public class DepartmentManagerService {
 
     /**
      * Finds all courses in the department
+     *
      * @param departmentManagerId department manager id
      * @return list of all courses in the department
      * @throws UserNotFoundException if there is no department manager with the given id
@@ -102,6 +109,7 @@ public class DepartmentManagerService {
 
     /**
      * Returns the department manager's department object
+     *
      * @param departmentManagerId department manager user id
      * @return department of the department manager
      * @throws UserNotFoundException if there is no department manager with the given user id
@@ -114,6 +122,7 @@ public class DepartmentManagerService {
 
     /**
      * Finds and returns the department manager with the given userId.
+     *
      * @param departmentManagerId department manager user id
      * @return Department manager
      * @throws UserNotFoundException if there is no department manager with the given user id
@@ -128,7 +137,8 @@ public class DepartmentManagerService {
 
     /**
      * Updates the attributes of the user
-     * @param userId department manager user id
+     *
+     * @param userId            department manager user id
      * @param userUpdateRequest updated user attributes
      * @return updated department manager
      */
@@ -142,11 +152,26 @@ public class DepartmentManagerService {
 
     /**
      * Saves the department manager.
+     *
      * @param departmentManager Department manager to save
      * @return the saved department manager
      */
     public DepartmentManager saveDepartmentManager(DepartmentManager departmentManager) {
+        userService.saveUser(departmentManager);
         return departmentManagerRepository.save(departmentManager);
+    }
+
+
+    /**
+     * Finds the instructor user id based on the department manager user id
+     *
+     * @param departmentManagerId department manager user id
+     * @return instructor user id
+     * @throws UserNotFoundException if there is no user with the given information
+     */
+    public long getInstructorId(long departmentManagerId) throws UserNotFoundException {
+        DepartmentManager departmentManager = getDepartmentManager(departmentManagerId);
+        return instructorService.findInstructorByUsername(departmentManager.getUsername()).getUserId();
     }
 
 }
