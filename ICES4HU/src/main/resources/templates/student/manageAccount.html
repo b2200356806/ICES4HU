@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/student/css/style.css">
+
+    <title>Manage Account</title>
+</head>
+
+<body>
+<!--Navigation bar-->
+<div th:replace="student/fragments/nav.html"></div>
+<!--end of Navigation bar-->
+
+<div class="container-fluid text-left text-white page-position">
+    <div class="page-background">
+        <h1>Manage Account</h1>
+        <div class="form-group">
+            <label>Upload Image</label>
+            <div class="input-group">
+                    <span class="input-group-btn">
+                        <span class="btn btn-default btn-file">
+                            Browse… <input type="file" id="imgInp">
+                        </span>
+                    </span>
+                <input type="text" class="form-control" readonly>
+            </div>
+            <img id='img-upload'/>
+        </div>
+
+        <h3>Change Password:</h3>
+        <form id="addCourseForm">
+            <div class="form-group mb-3">
+                <label for="np">New Password</label>
+                <input type="text" class="form-control" id="np" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="npa">New Password (Again)</label>
+                <input type="text" class="form-control" id="npa" required>
+            </div>
+
+            <button type="submit" class="btn btn-success">Done</button>
+        </form>
+    </div>
+</div>
+
+
+</body>
+<script src="/student/js/manageAccount.js"></script>
+
+
+</html>
