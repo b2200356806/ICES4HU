@@ -4,13 +4,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import penguins.backend.Course.Course;
-import penguins.backend.Course.CourseException.CourseNotFoundException;
+import penguins.backend.Course.Exception.CourseNotFoundException;
 import penguins.backend.Evaluation.EvaluationException.CourseAlreadyEvaluatedException;
 import penguins.backend.Evaluation.EvaluationForm.EvaluationForm;
 import penguins.backend.Evaluation.EvaluationResponse.EvaluationResponseDto;
-import penguins.backend.Semester.SemesterException.EvaluationNotStartedException;
-import penguins.backend.Semester.SemesterException.SemesterNotStartedException;
-import penguins.backend.Semester.SemesterException.AddOrDropFinishedException;
+import penguins.backend.Semester.Exception.EvaluationNotStartedException;
+import penguins.backend.Semester.Exception.SemesterNotStartedException;
+import penguins.backend.Semester.Exception.AddOrDropFinishedException;
 import penguins.backend.User.UserException.UserNotFoundException;
 import penguins.backend.User.UserUpdateRequest;
 

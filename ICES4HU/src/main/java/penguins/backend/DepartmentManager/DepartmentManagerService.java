@@ -2,7 +2,7 @@ package penguins.backend.DepartmentManager;
 
 import org.springframework.stereotype.Service;
 import penguins.backend.Course.Course;
-import penguins.backend.Course.CourseException.CourseNotFoundException;
+import penguins.backend.Course.Exception.CourseNotFoundException;
 import penguins.backend.Department.Department;
 import penguins.backend.Department.DepartmentException.DifferentDepartmentException;
 import penguins.backend.Department.DepartmentService;

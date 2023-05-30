@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import penguins.backend.Course.Course;
-import penguins.backend.Course.CourseException.CourseNotFoundException;
+import penguins.backend.Course.Exception.CourseNotFoundException;
 import penguins.backend.Department.Department;
 import penguins.backend.Department.DepartmentException.DifferentDepartmentException;
 import penguins.backend.Evaluation.EvaluationQuestion.EvaluationQuestion;

@@ -1,8 +1,8 @@
 package penguins.backend.Course;
 
 import org.springframework.stereotype.Service;
-import penguins.backend.Course.CourseException.CourseAlreadyExistsException;
-import penguins.backend.Course.CourseException.CourseNotFoundException;
+import penguins.backend.Course.Exception.CourseAlreadyExistsException;
+import penguins.backend.Course.Exception.CourseNotFoundException;
 import penguins.backend.Department.Department;
 
 import java.util.ArrayList;
