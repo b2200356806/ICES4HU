@@ -1,5 +1,6 @@
 package penguins.backend.Student;
 
+import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import penguins.backend.Course.Course;

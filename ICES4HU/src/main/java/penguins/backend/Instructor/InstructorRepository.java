@@ -11,17 +11,7 @@ import java.util.Optional;
 public class InstructorRepository {
     private final List<Instructor> instructors = new ArrayList<>();
 
-    public Optional<Instructor> findByUsername(String username) {
-        for (Instructor instructor : instructors) {
-            if (instructor.getUsername().equals(username)) {
-                return Optional.of(instructor);
-            }
-        }
-
-        return Optional.empty();
-    }
-
-    public Optional<Instructor> findById(long userId) {
+    public Optional<Instructor> findByUserId(long userId) {
         for (Instructor instructor : instructors)
             if (instructor.getUserId() == userId)
                 return Optional.of(instructor);
@@ -43,9 +33,5 @@ public class InstructorRepository {
         instructors.remove(instructor);
         instructors.add(instructor);
         return instructor;
-    }
-
-    public List<Instructor> findAll() {
-        return instructors;
     }
 }

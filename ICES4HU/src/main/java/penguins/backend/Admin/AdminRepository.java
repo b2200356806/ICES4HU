@@ -1,16 +1,17 @@
 package penguins.backend.Admin;
 
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class AdminRepository {
     private final List<Admin> admins = new ArrayList<>();
 
-    public Optional<Admin> findById(long userId) {
+    public Optional<Admin> findByUserId(long userId) {
         for (Admin admin : admins) {
             if (admin.getUserId() == userId) {
                 return Optional.of(admin);
@@ -30,3 +31,10 @@ public class AdminRepository {
     }
 
 }
+
+/*public interface AdminRepository extends JpaRepository<Admin, Long> {
+
+    Optional<Admin> findByUserId(long userId);
+
+
+}*/

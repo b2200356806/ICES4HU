@@ -1,38 +1,29 @@
 package penguins.backend.User;
 
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-@Component
-public class UserRepository {
+@Repository
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-    private final List<User> users = new ArrayList<>();
+    Optional<User> findByUsername(String username);
+    Optional<User> findByUserId(Integer userId);
 
-    public boolean existsByUsername(String username) {
-        for (User user : users) {
-            if (user.getUsername().equals(username)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    public Optional<User> findByUserId(long userId) {
-        for (User user : users) {
-            if (user.getUserId() == userId) {
-                return Optional.of(user);
-            }
-        }
-        return Optional.empty();
-    }
+    @Query(value = """
+      select  u from User u 
+      where u.username = :username 
+      """)
+    Optional<User> findUserIDByUserName(String username);
 
-    public User save(User user) {
-        users.remove(user);
-        users.add(user);
-        return user;
-    }
+    @Query(value = """
+      select  u from User u 
+      where u.username = :username
+      """)
+    Optional<User> findUserTypeByUserName(String username);
+
 
 }

@@ -25,9 +25,8 @@ public class CourseEvaluationService {
 
     /**
      * Evaluates a course and sets the responses
-     *
-     * @param student   Student evaluating the course
-     * @param course    The course being evaluated
+     * @param student Student evaluating the course
+     * @param course The course being evaluated
      * @param responses Responses given by the student
      * @throws CourseAlreadyEvaluatedException if the course was already evaluated by the student
      */
@@ -45,7 +44,6 @@ public class CourseEvaluationService {
 
     /**
      * Finds and returns the course evaluations for the given course.
-     *
      * @param course course
      * @return list of course evaluations for the given course
      */

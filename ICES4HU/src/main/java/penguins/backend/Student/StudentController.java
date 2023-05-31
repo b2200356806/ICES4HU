@@ -8,10 +8,10 @@ import penguins.backend.Course.Exception.CourseNotFoundException;
 import penguins.backend.Evaluation.EvaluationException.CourseAlreadyEvaluatedException;
 import penguins.backend.Evaluation.EvaluationForm.EvaluationForm;
 import penguins.backend.Evaluation.EvaluationResponse.EvaluationResponseDto;
-import penguins.backend.Semester.Exception.AddOrDropFinishedException;
-import penguins.backend.Semester.Exception.EvaluationNotStartedException;
+import penguins.backend.Semester.SemesterException.EvaluationNotStartedException;
 import penguins.backend.Semester.Exception.SemesterNotStartedException;
-import penguins.backend.User.UserException.UserNotFoundException;
+import penguins.backend.Semester.SemesterException.AddOrDropFinishedException;
+import penguins.backend.User.Exception.UserNotFoundException;
 import penguins.backend.User.UserUpdateRequest;
 
 import java.util.ArrayList;
@@ -31,7 +31,6 @@ public class StudentController {
 
     /**
      * Returns a list of all students in the database
-     *
      * @return ResponseEntity containing a list of students in the database
      */
     @GetMapping("/all")
@@ -47,7 +46,6 @@ public class StudentController {
 
     /**
      * Finds the student with the given id.
-     *
      * @param userId user id of the student
      * @return ResponseEntity containing the StudentDto with the given id if it exists
      */
@@ -65,7 +63,6 @@ public class StudentController {
 
     /**
      * Finds the courses taken by the student with the given id.
-     *
      * @param userId user id of the student
      * @return ResponseEntity containing a list of courses taken by the student with the given id
      */
@@ -81,8 +78,7 @@ public class StudentController {
 
     /**
      * Enrolls the student to the course with the given id.
-     *
-     * @param userId     user id of the student
+     * @param userId user id of the student
      * @param courseCode course code
      * @return ResponseEntity containing the updated list of courses
      */
@@ -101,8 +97,7 @@ public class StudentController {
 
     /**
      * Drops the student from a course with the given id.
-     *
-     * @param userId     user id of the student
+     * @param userId user id of the student
      * @param courseCode course code
      * @return ResponseEntity containing the updated list of courses
      */
@@ -121,7 +116,6 @@ public class StudentController {
 
     /**
      * Gets evaluationForms that are not null for the courses taken by the student.
-     *
      * @param userId student user id
      * @return EvaluationForms for the courses of the student
      */
@@ -140,7 +134,6 @@ public class StudentController {
 
     /**
      * Gets an evaluationForm with the given id.
-     *
      * @param evaluationFormId evaluation form id
      * @return EvaluationForm with the given id.
      */
@@ -155,12 +148,12 @@ public class StudentController {
     }
 
 
+
     /**
      * Evaluates a course.
-     *
-     * @param userId     student user id
+     * @param userId student user id
      * @param courseCode course code
-     * @param responses  Responses given by the student
+     * @param responses Responses given by the student
      */
     @PostMapping(path = "/evaluation/{courseCode}")
     public ResponseEntity<String> evaluate(@PathVariable long userId, @PathVariable String courseCode,
@@ -180,8 +173,7 @@ public class StudentController {
 
     /**
      * Updates the attributes of the user
-     *
-     * @param userId            student user id
+     * @param userId student user id
      * @param userUpdateRequest updated user attributes
      * @return updated student
      */
@@ -197,9 +189,9 @@ public class StudentController {
     }
 
 
+
     /**
      * Converts a Student object to a StudentDto
-     *
      * @param student the Student object
      * @return a StudentDto object created based on the Student object
      */

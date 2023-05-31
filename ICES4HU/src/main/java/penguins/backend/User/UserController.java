@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import penguins.backend.User.UserException.UserNotFoundException;
+import penguins.backend.User.Exception.UserNotFoundException;
 
 @RestController
 @RequestMapping("/api/user/{userId}")
@@ -19,7 +19,7 @@ public class UserController {
 
 
     @GetMapping("/user-type")
-    public ResponseEntity<UserType> getUserType(@PathVariable long userId) {
+    public ResponseEntity<UserType> getUserType(@PathVariable Integer userId) {
         try {
             UserType userType = userService.getUserType(userId);
             return ResponseEntity.ok(userType);

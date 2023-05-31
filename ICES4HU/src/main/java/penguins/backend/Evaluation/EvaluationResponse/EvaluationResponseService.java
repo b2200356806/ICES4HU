@@ -21,7 +21,6 @@ public class EvaluationResponseService {
 
     /**
      * Creates and saves evaluation responses from the given evaluation response dto list
-     *
      * @param evaluationResponseDtoList List of evaluation response dto
      * @return List of evaluation responses
      */
