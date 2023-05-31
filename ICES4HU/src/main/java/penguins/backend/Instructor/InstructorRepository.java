@@ -21,7 +21,7 @@ public class InstructorRepository {
         return Optional.empty();
     }
 
-    public Optional<Instructor> findById(long userId) {
+    public Optional<Instructor> findByUserId(long userId) {
         for (Instructor instructor : instructors)
             if (instructor.getUserId() == userId)
                 return Optional.of(instructor);

@@ -1,5 +1,6 @@
 package penguins.backend.Admin;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ import penguins.backend.User.UserUpdateRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/{UserId}")
+@RequestMapping("/api/admin/{userId}")
 public class AdminController {
 
     private final AdminService adminService;
@@ -224,22 +225,22 @@ public class AdminController {
     }
 
 
-    /**
-     * Creates an instructor/departmentManager
-     *
-     * @param instructorRegisterRequest the user register request
-     */
-    @PostMapping("/create-instructor")
-    public ResponseEntity<String> createInstructor(@RequestBody InstructorRegisterRequest instructorRegisterRequest) {
-
-        try {
-            adminService.createInstructor(instructorRegisterRequest);
-            return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
-        } catch (UserExistsException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-
-    }
+//    /**
+//     * Creates an instructor/departmentManager
+//     *
+//     * @param instructorRegisterRequest the user register request
+//     */
+//    @PostMapping("/create-instructor")
+//    public ResponseEntity<String> createInstructor(@RequestBody InstructorRegisterRequest instructorRegisterRequest) {
+//
+//        try {
+//            adminService.createInstructor(instructorRegisterRequest);
+//            return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
+//        } catch (UserExistsException e) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+//        }
+//
+//    }
 
 
     private AdminDto adminToAdminDto(Admin admin) {

@@ -117,7 +117,7 @@ public class InstructorService {
      * @throws UserNotFoundException if there is no instructor with the given id
      */
     public Instructor getInstructorByUserId(long instructorId) throws UserNotFoundException {
-        return instructorRepository.findById(instructorId)
+        return instructorRepository.findByUserId(instructorId)
                 .orElseThrow(() -> new UserNotFoundException("Instructor not found. User id: " + instructorId));
     }
 

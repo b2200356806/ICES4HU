@@ -1,7 +1,7 @@
 package penguins.backend.Student;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.Entity;
+import lombok.*;
 import penguins.backend.Course.Course;
 import penguins.backend.Department.Department;
 import penguins.backend.User.User;

@@ -1,6 +1,7 @@
 package penguins.backend.Admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import penguins.backend.Course.Course;
 import penguins.backend.Course.CourseRepository;
@@ -202,49 +203,49 @@ public class AdminService {
      * @throws UserNotFoundException if there is no admin with the given user id
      */
     public Admin getAdminByUserId(long userId) throws UserNotFoundException {
-        return adminRepository.findById(userId)
+        return adminRepository.findByUserId(userId)
                 .orElseThrow(() -> new UserNotFoundException("Admin not found. User id: " + userId));
     }
 
 
-    /**
-     * Creates an instructor/departmentManager
-     *
-     * @param instructorRegisterRequest the user register request
-     */
-    public void createInstructor(InstructorRegisterRequest instructorRegisterRequest) throws UserExistsException {
-
-        String username = instructorRegisterRequest.getUsername();
-        if (userService.existsByUsername(username)) {
-            throw new UserExistsException("User exists with this username");
-        }
-
-        boolean isDepartmentManager = instructorRegisterRequest.isDepartmentManager();
-        Department department = departmentService.getOrCreateDepartment(instructorRegisterRequest.getDepartment().getName());
-
-        if (isDepartmentManager) {
-            DepartmentManager departmentManager = new DepartmentManager();
-            departmentManager.setDepartment(department);
-            departmentManager.setFirstName(instructorRegisterRequest.getFirstName());
-            departmentManager.setLastName(instructorRegisterRequest.getLastName());
-            departmentManager.setUsername(username);
-            departmentManager.setPassword(instructorRegisterRequest.getPassword());
-            departmentManager.setCourses(instructorRegisterRequest.getCourses());
-            departmentManager.setUserId(5);
-            instructorService.saveInstructor(departmentManager);
-            departmentManagerService.saveDepartmentManager(departmentManager);
-        } else {
-            Instructor instructor = new Instructor();
-            instructor.setDepartment(department);
-            instructor.setFirstName(instructorRegisterRequest.getFirstName());
-            instructor.setLastName(instructorRegisterRequest.getLastName());
-            instructor.setUsername(username);
-            instructor.setPassword(instructorRegisterRequest.getPassword());
-            instructor.setCourses(instructorRegisterRequest.getCourses());
-            instructor.setUserId(10);
-            instructorService.saveInstructor(instructor);
-        }
-    }
+//    /**
+//     * Creates an instructor/departmentManager
+//     *
+//     * @param instructorRegisterRequest the user register request
+//     */
+//    public void createInstructor(InstructorRegisterRequest instructorRegisterRequest) throws UserExistsException {
+//
+//        String username = instructorRegisterRequest.getUsername();
+//        if (userService.existsByUsername(username)) {
+//            throw new UserExistsException("User exists with this username");
+//        }
+//
+//        boolean isDepartmentManager = instructorRegisterRequest.isDepartmentManager();
+//        Department department = departmentService.getOrCreateDepartment(instructorRegisterRequest.getDepartment().getName());
+//
+//        if (isDepartmentManager) {
+//            DepartmentManager departmentManager = new DepartmentManager();
+//            departmentManager.setDepartment(department);
+//            departmentManager.setFirstName(instructorRegisterRequest.getFirstName());
+//            departmentManager.setLastName(instructorRegisterRequest.getLastName());
+//            departmentManager.setUsername(username);
+//            departmentManager.setPassword(instructorRegisterRequest.getPassword());
+//            departmentManager.setCourses(instructorRegisterRequest.getCourses());
+//            departmentManager.setUserId(5);
+//            instructorService.saveInstructor(departmentManager);
+//            departmentManagerService.saveDepartmentManager(departmentManager);
+//        } else {
+//            Instructor instructor = new Instructor();
+//            instructor.setDepartment(department);
+//            instructor.setFirstName(instructorRegisterRequest.getFirstName());
+//            instructor.setLastName(instructorRegisterRequest.getLastName());
+//            instructor.setUsername(username);
+//            instructor.setPassword(instructorRegisterRequest.getPassword());
+//            instructor.setCourses(instructorRegisterRequest.getCourses());
+//            instructor.setUserId(10);
+//            instructorService.saveInstructor(instructor);
+//        }
+//    }
 
 
     /* ADD SOME EXAMPLES TO THE DATABASE */
