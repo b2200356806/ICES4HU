@@ -19,7 +19,7 @@ public class UserController {
 
 
     @GetMapping("/user-type")
-    public ResponseEntity<UserType> getUserType(@PathVariable long userId) {
+    public ResponseEntity<UserType> getUserType(@PathVariable Integer userId) {
         try {
             UserType userType = userService.getUserType(userId);
             return ResponseEntity.ok(userType);
