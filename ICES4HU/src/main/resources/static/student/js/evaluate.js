@@ -33,7 +33,7 @@ xmlhttp6.onload = function () {
                     <div class="text-center mb-3">
                     
                         <div class="d-inline mx-3">
-                            Bad
+                            Very Bad
                         </div>
 
                         <div class="form-check form-check-inline ${qID}">
@@ -66,7 +66,7 @@ xmlhttp6.onload = function () {
                             <label class="form-check-label" for="inlineRadio5">5</label>
                         </div>
                         <div class="d-inline me-4">
-                            Excellent
+                            Very Good
                         </div>
                     </div>
                 </div>`
