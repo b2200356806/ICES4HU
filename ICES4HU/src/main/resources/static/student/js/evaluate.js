@@ -130,5 +130,16 @@ function getSelected() {
         final_responses.push(response);
     }
     xhr2.send(JSON.stringify(final_responses));
-    location.reload();
+    window.createNotification({
+        closeOnClick: true,
+        displayCloseButton: false,
+        positionClass: 'nfc-top-right',
+        onclick: false,
+        showDuration: 3500,
+        theme: 'success'
+    })({
+        title: 'Success',
+        message: 'Evaluation submitted successfully'
+    });
+    // location.reload();
 }

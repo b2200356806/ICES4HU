@@ -36,8 +36,8 @@ form.onsubmit = function(event)
                 showDuration: 3500,
                 theme: 'success'
             })({
-                title: 'title',
-                message: 'message'
+                title: 'Success',
+                message: 'Course added successfully'
             });
             form.reset(); //reset form after AJAX success or do something else
         }

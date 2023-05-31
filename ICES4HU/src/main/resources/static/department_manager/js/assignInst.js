@@ -55,6 +55,17 @@ form.onsubmit = function (event) {
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState == XMLHttpRequest.DONE) {
+            window.createNotification({
+                closeOnClick: true,
+                displayCloseButton: false,
+                positionClass: 'nfc-top-right',
+                onclick: false,
+                showDuration: 3500,
+                theme: 'success'
+            })({
+                title: 'Success',
+                message: 'Instructor assigned successfully'
+            });
             form.reset(); //reset form after AJAX success or do something else
         }
     }
