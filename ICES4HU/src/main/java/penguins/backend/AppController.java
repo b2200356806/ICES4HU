@@ -104,4 +104,14 @@ public class AppController {
     public String viewInsAcc() {
         return "instructor/manageAccount";
     }
+
+    @GetMapping("/login")
+    public String viewLogin() {
+        return "login/login";
+    }
+
+    @GetMapping("/homepage")
+    public String viewDefaultHome() {
+        return "login/defaultHomepage";
+    }
 }
