@@ -9,7 +9,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/student/css/style.css">
-    <title>Home Page</title>
+
+    <link href="/notifications/css/notifications.css" rel="stylesheet">
+
+    <title>Course Evaluation</title>
 </head>
 <body>
 <!--Navigation bar-->
@@ -18,19 +21,22 @@
 
 <div class="container-fluid text-left text-white page-position">
     <div class="page-background">
-        <h1>Welcome</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident,
-            sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <h1>Evaluate Courses/Instructors</h1>
+        <form>
+            <div class="form-group">
+                <label for="course">Select Course</label>
+                <select class="form-control" id="course" onchange="selectEval()">
+                </select>
+            </div>
+        </form>
         <hr>
-        <h3>Test</h3>
-        <p>Lorem ipsum...</p>
+        <!-- Survey -->
+        <div class="survey-form" id="preview">
+        </div>
     </div>
 </div>
 
 </body>
+<script src="/student/js/evaluate.js"></script>
+<script src="/notifications/js/notifications.js"></script>
 </html>

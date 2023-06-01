@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,35 +13,83 @@
 
     <title>Manage Semester</title>
 </head>
+
 <body>
-    <!--Navigation bar-->
-    <div th:replace="admin/fragments/nav.html"></div>
-    <!--end of Navigation bar-->
+<!--Navigation bar-->
+<div th:replace="admin/fragments/nav.html"></div>
+<!--end of Navigation bar-->
 
 
-    <div class="container-fluid text-left text-white page-position">
-        <div class="page-background">
-            <h1>Manage Semester</h1>
-            <form id="semesterForm">
-                <div class="form-group row">
-                    <label for="semester-status" class="col-sm-2 col-form-label">Semester Status:</label>
-                    <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="semester-status" value="Not Started" style="color: black;">
-                    </div>
+<div class="container-fluid text-left text-white page-position">
+    <div class="page-background">
+        <h1>Manage Semester</h1>
+        <form id="semesterForm">
+            <div class="form-group row">
+                <label for="semester-status" class="col-sm-2 col-form-label">Semester Status:</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="semester-status"
+                           style="color: black;">
                 </div>
-                <div class="form-group mb-3">
-                    <label for="startDate">Start Date:</label>
-                    <input type="date" class="form-control" id="startDate">
+            </div>
+            <div class="form-group mb-3">
+                <label for="startDate">Start Date:</label>
+                <input type="date" class="form-control" id="startDate">
+            </div>
+            <div class="form-group mb-3">
+                <label for="endDate">End Date:</label>
+                <input type="date" class="form-control" id="endDate">
+            </div>
+            <button type="submit" class="btn btn-primary" id="start-btn">Start</button>
+            <button type="submit" class="btn btn-primary" id="update-btn" disabled>Update</button>
+            <button type="submit" class="btn btn-primary" id="end-btn">End</button>
+        </form>
+        <hr>
+        <h1>Add-Drop Week</h1>
+        <form id="addDropForm">
+            <div class="form-group row">
+                <label for="addDrop-status" class="col-sm-2 col-form-label">Add-Drop Week Status:</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="addDrop-status"
+                           style="color: black;">
                 </div>
-                <div class="form-group mb-3">
-                    <label for="endDate">End Date:</label>
-                    <input type="date" class="form-control" id="endDate">
+            </div>
+            <div class="form-group mb-3">
+                <label for="addDropStartDate">Start Date:</label>
+                <input type="date" class="form-control" id="addDropStartDate">
+            </div>
+            <div class="form-group mb-3">
+                <label for="addDropEndDate">End Date:</label>
+                <input type="date" class="form-control" id="addDropEndDate">
+            </div>
+            <button type="submit" class="btn btn-primary" id="ad-start">Start</button>
+            <button type="submit" class="btn btn-primary" id="ad-update">Update</button>
+            <button type="submit" class="btn btn-primary" id="ad-end">End</button>
+        </form>
+        <hr>
+        <h1>Evaluation Week</h1>
+        <form id="evalForm">
+            <div class="form-group row">
+                <label for="eval-status" class="col-sm-2 col-form-label">Evaluation Week Status:</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="eval-status"
+                           style="color: black;">
                 </div>
-                <button type="submit" class="btn btn-primary" id="start-btn">Start</button>
-                <button type="submit" class="btn btn-primary" id="end-btn" disabled>End</button>
-            </form>
-        </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="evalStartDate">Start Date:</label>
+                <input type="date" class="form-control" id="evalStartDate">
+            </div>
+            <div class="form-group mb-3">
+                <label for="evalEndDate">End Date:</label>
+                <input type="date" class="form-control" id="evalEndDate">
+            </div>
+            <button type="submit" class="btn btn-primary" id="eval-start">Start</button>
+            <button type="submit" class="btn btn-primary" id="eval-update">Update</button>
+            <button type="submit" class="btn btn-primary" id="eval-end">End</button>
+        </form>
     </div>
-    <script src="/admin/js/manageSemester.js"></script>
+</div>
+<script src="/admin/js/manageSemester.js"></script>
 </body>
+
 </html>
