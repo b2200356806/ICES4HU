@@ -31,6 +31,7 @@ However, to send an object without such note, you need to send all the attribute
 | Create first admin account  | POST   |                    | /api/admin/{user_id}/create-first-admin                  ||
 | Create instructor           | POST   | InstructorRegisterRequest | /api/admin/{user_id}/create-instructor            |For department object in the instructorRegisterRequest, the name attribute is required.|
 | Add some examples           | POST   |                    | /api/admin/{user_id}/add-examples                        ||
+| Get all instructors             | GET    |                    | /api/admin/{user_id}/instructors                             ||
 
 ### Department Manager
 | Description                     | Method | RequestBody        | Endpoint                                                               | Notes |

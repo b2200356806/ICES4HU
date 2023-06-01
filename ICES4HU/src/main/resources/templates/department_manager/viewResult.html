@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/department_manager/css/style.css">
+    <title>View Evaluation Results</title>
+</head>
+<body>
+<!--Navigation bar-->
+<div th:replace="department_manager/fragments/nav.html"></div>
+<!--end of Navigation bar-->
+
+<div class="container-fluid text-left text-white page-position">
+    <div class="page-background">
+        <h1>View Evaluation Results</h1>
+        <form>
+            <div class="form-group">
+                <label for="course">Select Course</label>
+                <select class="form-control" id="course" onchange="selectEval()">
+                </select>
+            </div>
+        </form>
+        <hr>
+        <h1>Evaluation Results</h1>
+        <canvas id="chart" width=600 height=300></canvas>
+        <button id="btn-download" style="color: black;">
+            Download
+        </button>
+    </div>
+</div>
+
+</body>
+<script src="/department_manager/js/viewResult.js"></script>
+<script src="https://code.jscharting.com/2.9.0/jscharting.js"></script>
+</html>

@@ -4,8 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import penguins.backend.Course.Course;
-import penguins.backend.Course.CourseException.CourseAlreadyExistsException;
-import penguins.backend.Course.CourseException.CourseNotFoundException;
+import penguins.backend.Course.Exception.CourseAlreadyExistsException;
+import penguins.backend.Course.Exception.CourseNotFoundException;
+import penguins.backend.Instructor.Instructor;
 import penguins.backend.Instructor.InstructorRegisterRequest;
 import penguins.backend.Semester.SemesterDto;
 import penguins.backend.User.UserException.UserExistsException;
@@ -26,6 +27,7 @@ public class AdminController {
 
     /**
      * Finds the admin with the given id.
+     *
      * @param userId user id of the admin
      * @return ResponseEntity containing the AdminDto with the given id if it exists
      */
@@ -43,6 +45,7 @@ public class AdminController {
 
     /**
      * Returns a list of courses in the database.
+     *
      * @return ResponseEntity containing a list of courses
      */
     @GetMapping(path = "/courses")
@@ -54,6 +57,7 @@ public class AdminController {
 
     /**
      * Adds a course to the database.
+     *
      * @param course the course to add to the database
      * @return ResponseEntity containing the created course
      */
@@ -70,6 +74,7 @@ public class AdminController {
 
     /**
      * Removes a course from the database.
+     *
      * @param course the course code of the course to remove from the database
      * @return ResponseEntity indicating if the course was removed
      */
@@ -86,6 +91,7 @@ public class AdminController {
 
     /**
      * Starts the semester.
+     *
      * @return ResponseEntity containing HttpStatus OK
      */
     @PostMapping(path = "/semester/start")
@@ -97,6 +103,7 @@ public class AdminController {
 
     /**
      * Finishes the semester.
+     *
      * @return ResponseEntity containing HttpStatus OK
      */
     @PostMapping(path = "/semester/finish")
@@ -108,6 +115,7 @@ public class AdminController {
 
     /**
      * Starts the evaluation.
+     *
      * @return ResponseEntity containing HttpStatus OK
      */
     @PostMapping(path = "/evaluation/start")
@@ -119,6 +127,7 @@ public class AdminController {
 
     /**
      * Finishes the evaluation.
+     *
      * @return ResponseEntity containing HttpStatus OK
      */
     @PostMapping(path = "/evaluation/finish")
@@ -128,9 +137,9 @@ public class AdminController {
     }
 
 
-
     /**
      * Starts add or drop.
+     *
      * @return ResponseEntity containing HttpStatus OK
      */
     @PostMapping(path = "/add-or-drop/start")
@@ -142,6 +151,7 @@ public class AdminController {
 
     /**
      * Finishes add or drop.
+     *
      * @return ResponseEntity containing HttpStatus OK
      */
     @PostMapping(path = "/add-or-drop/finish")
@@ -151,9 +161,9 @@ public class AdminController {
     }
 
 
-
     /**
      * Indicates whether the semester is started.
+     *
      * @return ResponseEntity containing the semesterDto
      */
     @GetMapping(path = "/semester")
@@ -164,7 +174,8 @@ public class AdminController {
 
     /**
      * Updates the attributes of the user
-     * @param userId admin user id
+     *
+     * @param userId            admin user id
      * @param userUpdateRequest updated user attributes
      * @return updated admin
      */
@@ -182,6 +193,7 @@ public class AdminController {
 
     /**
      * Admits the student.
+     *
      * @param studentId student user id
      * @return updated student
      */
@@ -198,6 +210,7 @@ public class AdminController {
 
     /**
      * Creates the first admin object
+     *
      * @return ResponseEntity containing true if new object created, false otherwise
      */
     @PostMapping("/create-first-admin")
@@ -213,6 +226,7 @@ public class AdminController {
 
     /**
      * Creates an instructor/departmentManager
+     *
      * @param instructorRegisterRequest the user register request
      */
     @PostMapping("/create-instructor")
@@ -244,5 +258,14 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Examples created successfully");
     }
 
-
+    /**
+     * Returns a list of instructors in the database.
+     *
+     * @return ResponseEntity containing a list of instructors
+     */
+    @GetMapping(path = "/instructors")
+    public ResponseEntity<List<Instructor>> getInstructors() {
+        List<Instructor> instructors = adminService.getInstructors();
+        return ResponseEntity.ok(instructors);
+    }
 }

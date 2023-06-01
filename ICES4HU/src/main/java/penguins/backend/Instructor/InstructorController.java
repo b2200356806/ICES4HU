@@ -24,6 +24,7 @@ public class InstructorController {
 
     /**
      * Finds and returns the instructorDto object with the given id.
+     *
      * @param userId instructor id
      * @return instructorDto object with the given user id
      */
@@ -41,6 +42,7 @@ public class InstructorController {
 
     /**
      * Returns a list of courses of the instructor.
+     *
      * @param userId instructor user id
      * @return list of courses of the instructor
      */
@@ -58,6 +60,7 @@ public class InstructorController {
     /**
      * Creates evaluation forms for the courses of the instructor if they don't already exist. Otherwise,
      * it returns the existing evaluation forms.
+     *
      * @param userId instructor id
      * @return List of evaluation forms for the courses of the instructor
      */
@@ -74,6 +77,7 @@ public class InstructorController {
 
     /**
      * Finds the evaluation form using the given id
+     *
      * @param evaluationFormId evaluation form id
      * @return Evaluation form object with the given id
      */
@@ -86,7 +90,8 @@ public class InstructorController {
 
     /**
      * Adds an evaluationQuestion to the evaluationForm for the given course.
-     * @param evaluationFormId The evaluationForm id for which the question is being created
+     *
+     * @param evaluationFormId   The evaluationForm id for which the question is being created
      * @param evaluationQuestion EvaluationQuestion with given text
      * @return The evaluationForm for the course with the new question
      */
@@ -99,7 +104,8 @@ public class InstructorController {
 
     /**
      * Removes the evaluationQuestion from the given evaluationForm.
-     * @param evaluationFormId Evaluation form id
+     *
+     * @param evaluationFormId   Evaluation form id
      * @param evaluationQuestion Question with the given id
      * @return the updated evaluation form
      */
@@ -112,6 +118,7 @@ public class InstructorController {
 
     /**
      * Returns a courseEvaluationDto based on the courseEvaluations for the course
+     *
      * @param courseCode course code
      * @return courseEvaluationDto based on the courseEvaluations for the course
      */
@@ -122,10 +129,10 @@ public class InstructorController {
     }
 
 
-
     /**
      * Updates the attributes of the user
-     * @param userId instructor user id
+     *
+     * @param userId            instructor user id
      * @param userUpdateRequest updated user attributes
      * @return updated instructor
      */
@@ -141,9 +148,9 @@ public class InstructorController {
     }
 
 
-
     /**
      * Converts an Instructor object to an InstructorDto
+     *
      * @param instructor the Instructor object
      * @return an InstructorDto object created based on the Instructor object
      */

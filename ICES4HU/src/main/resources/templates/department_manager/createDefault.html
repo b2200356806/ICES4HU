@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/department_manager/css/style.css">
+
+    <!-- Add questions to form -->
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>Create Default Questions</title>
+</head>
+
+<body>
+<!--Navigation bar-->
+<div th:replace="department_manager/fragments/nav.html"></div>
+<!--end of Navigation bar-->
+
+<div class="container-fluid text-left text-white page-position">
+    <div class="page-background">
+        <h1>Create Default Questions</h1>
+        <div class="container">
+            <div class="row">
+                <div class="control-group" id="fields">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <form role="form" autocomplete="off" id="evaluation-form">
+                            <div class="entry input-group col-xs-3">
+                                <input class="form-control" name="fields[]" type="text"
+                                       placeholder="Type something"/>
+                                <span class="input-group-btn">
+                                        <button class="btn btn-success btn-add" type="button">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </span>
+                            </div>
+                        </form>
+                        <br>
+                        <small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another default question
+                        </small>
+                    </div>
+                    <button type="submit" class="btn btn-primary" value="submit" onclick="submitQuestion()"
+                            style="margin-top: 2%;">Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h1>Default Question Preview</h1>
+        <div class="container-fluid">
+            <div class="survey-background">
+                <div class="container">
+                    <div class="row" id="preview">
+                        <!--                        <div class="entry input-group col-xs-3" style="margin-left: 22%">-->
+                        <!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script src="/department_manager/js/createDefault.js"></script>
+
+</html>

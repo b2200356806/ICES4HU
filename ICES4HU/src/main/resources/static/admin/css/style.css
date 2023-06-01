@@ -11,7 +11,7 @@ body{
 .navbar-header{
     height: 7%;
 }
-
+ 
 .row.content {height: 100%}
 
 #hulogo{
@@ -19,7 +19,7 @@ body{
     height: 4%;
     display: inline-block;
 }
-
+  
 #sidenav {
     padding-top: 20px;
     background-color: #202027;
@@ -65,4 +65,80 @@ body{
     background-color: #202027;
     padding: 3%;
     border-radius: 25px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload {
+    width: 10%;
+}
+
+/* table */
+.intro {
+    height: 100%;
+    overflow-x: auto;
+}
+
+table td,
+table th {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+thead th,
+tbody th {
+    color: #fff;
+    background-color: #202027;
+}
+
+tbody td {
+    font-weight: 500;
+    background-color: #202027;
+    color: #fff;
+}
+
+.dataTables_wrapper,
+.dataTables_filter {
+    color: #fff !important;
+}
+
+input {
+    color: black !important;
+}
+
+.dataTables_wrapper,
+.dataTables_info {
+    color: #fff !important;
+}
+
+#myTable_previous {
+    color: #fff !important;
+}
+
+#myTable_next {
+    color: #fff !important;
+}
+
+.paginate_button {
+    background-color: #707070;
 }

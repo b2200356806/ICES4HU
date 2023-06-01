@@ -44,4 +44,8 @@ public class InstructorRepository {
         instructors.add(instructor);
         return instructor;
     }
+
+    public List<Instructor> findAll() {
+        return instructors;
+    }
 }
