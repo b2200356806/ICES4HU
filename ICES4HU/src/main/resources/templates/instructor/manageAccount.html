@@ -10,6 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/instructor/css/style.css">
+    <link rel="stylesheet" href="/notifications/css/notifications.css">
 
     <title>Manage Account</title>
 </head>
@@ -35,18 +36,26 @@
             <img id='img-upload'/>
         </div>
 
-        <h3>Change Password:</h3>
-        <form id="addCourseForm">
+        <h3>Change Account Information:</h3>
+        <form id="manageForm">
+            <div class="form-group mb-3">
+                <label for="firstName">New First Name</label>
+                <input type="text" class="form-control" name="firstName" id="firstName" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="lastName">New Last Name</label>
+                <input type="text" class="form-control" name="lastName" id="lastName" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="username">New Username</label>
+                <input type="text" class="form-control" name="username" id="username" required>
+            </div>
             <div class="form-group mb-3">
                 <label for="np">New Password</label>
-                <input type="text" class="form-control" id="np" required>
-            </div>
-            <div class="form-group mb-3">
-                <label for="npa">New Password (Again)</label>
-                <input type="text" class="form-control" id="npa" required>
+                <input type="text" class="form-control" name="np" id="np" required>
             </div>
 
-            <button type="submit" class="btn btn-success">Done</button>
+            <button type="submit" class="btn btn-success" value="Submit">Done</button>
         </form>
     </div>
 </div>
@@ -54,6 +63,6 @@
 
 </body>
 <script src="/instructor/js/manageAccount.js"></script>
-
+<script src="/notifications/js/notifications.js"></script>
 
 </html>

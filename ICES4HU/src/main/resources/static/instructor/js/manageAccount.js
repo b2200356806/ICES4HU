@@ -33,3 +33,43 @@ $(document).ready( function() {
         readURL(this);
     }); 	
 });
+
+
+var form = document.getElementById('manageForm');
+form.onsubmit = function(event)
+{
+    var xhr = new XMLHttpRequest();
+    var formData = new FormData(form);
+    //open the request
+    xhr.open('POST','http://localhost:8080/api/instructors/501/update-info')
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    let manageInfo = {
+        firstName: formData.get("firstName"),
+        lastName: formData.get("lastName"),
+        username: formData.get("username"),
+        password: formData.get("password")
+    };
+
+    //send the form data
+    xhr.send(JSON.stringify(manageInfo));
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            window.createNotification({
+                closeOnClick: true,
+                displayCloseButton: false,
+                positionClass: 'nfc-top-right',
+                onclick: false,
+                showDuration: 3500,
+                theme: 'success'
+            })({
+                title: 'Success',
+                message: 'Account updated successfully'
+            });
+            form.reset(); //reset form after AJAX success or do something else
+        }
+    }
+    //Fail the onsubmit to avoid page refresh.
+    return false;
+}
