@@ -22,6 +22,12 @@ form.onsubmit = function(event)
     //send the form data
     xhr.send(JSON.stringify(instructorAdded));
 
+    let notification_message = ""
+
+    if (depCheck.checked)
+        notification_message = "Department manager created successfully"
+    else notification_message = "Instructor created successfully"
+
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             window.createNotification({
@@ -33,7 +39,7 @@ form.onsubmit = function(event)
                 theme: 'success'
             })({
                 title: 'Success',
-                message: 'Instructor created successfully'
+                message: notification_message
             });
             form.reset(); //reset form after AJAX success or do something else
         }
