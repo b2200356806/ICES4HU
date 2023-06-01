@@ -42,9 +42,9 @@ public class InstructorService {
     }
 
 
-
     /**
      * Returns a list of courses of the instructor.
+     *
      * @param instructorId instructor user id
      * @return list of courses of the instructor
      * @throws UserNotFoundException if there is no instructor with the given id
@@ -58,6 +58,7 @@ public class InstructorService {
     /**
      * Creates evaluation forms for the courses of the instructor if they don't already exist. Otherwise,
      * it returns the existing evaluation forms.
+     *
      * @param instructorId instructor id
      * @return List of evaluation forms for the courses of the instructor
      * @throws UserNotFoundException if there is no instructor with the given id
@@ -75,6 +76,7 @@ public class InstructorService {
 
     /**
      * Finds the evaluation form using the given id
+     *
      * @param evaluationFormId evaluation form id
      * @return Evaluation form object with the given id
      */
@@ -85,8 +87,9 @@ public class InstructorService {
 
     /**
      * Adds an evaluationQuestion to the evaluationForm for the given course.
+     *
      * @param evaluationFormId The evaluationForm id for which the question is being created
-     * @param questionText EvaluationQuestion text
+     * @param questionText     EvaluationQuestion text
      * @return The evaluationForm for the course with the new question
      */
     public EvaluationForm addEvaluationQuestion(long evaluationFormId, String questionText) {
@@ -96,8 +99,9 @@ public class InstructorService {
 
     /**
      * Removes the evaluationQuestion from the given evaluationForm.
+     *
      * @param evaluationFormId Evaluation form id
-     * @param questionId Question id
+     * @param questionId       Question id
      * @return the updated evaluation form
      */
     public EvaluationForm removeEvaluationQuestion(long evaluationFormId, long questionId) {
@@ -107,18 +111,20 @@ public class InstructorService {
 
     /**
      * Finds and returns the instructor object with the given id.
+     *
      * @param instructorId instructor id
      * @return instructor object with the given user id
      * @throws UserNotFoundException if there is no instructor with the given id
      */
     public Instructor getInstructorByUserId(long instructorId) throws UserNotFoundException {
-        return instructorRepository.findById(instructorId)
+        return instructorRepository.findByUserId(instructorId)
                 .orElseThrow(() -> new UserNotFoundException("Instructor not found. User id: " + instructorId));
     }
 
 
     /**
      * Finds and returns the instructors in the given department.
+     *
      * @param department instructor department
      * @return instructors in the given department
      */
@@ -129,6 +135,7 @@ public class InstructorService {
 
     /**
      * Returns a courseEvaluationDto based on the courseEvaluations for the course
+     *
      * @param courseCode course code
      * @return courseEvaluationDto based on the courseEvaluations for the course
      */
@@ -155,9 +162,10 @@ public class InstructorService {
 
     /**
      * Updates the attributes of the user
-     * @param userId instructor user id
+     *
+     * @param userId            instructor user id
      * @param userUpdateRequest updated user attributes
-     * @return  updated instructor
+     * @return updated instructor
      */
     public Instructor updateInstructor(long userId, UserUpdateRequest userUpdateRequest) throws UserNotFoundException {
         Instructor instructor = getInstructorByUserId(userId);
@@ -168,6 +176,7 @@ public class InstructorService {
 
     /**
      * Updates an instructor
+     *
      * @param instructor instructor with updated attributes
      * @return the updated instructor
      */
@@ -179,6 +188,7 @@ public class InstructorService {
 
     /**
      * Saves the instructor.
+     *
      * @param instructor Instructor to save
      * @return the saved instructor
      */
@@ -190,6 +200,7 @@ public class InstructorService {
 
     /**
      * Finds the instructor with username.
+     *
      * @param username instructor username
      * @return the instructor with the given username
      */
@@ -198,5 +209,14 @@ public class InstructorService {
                 .orElseThrow(() -> new UserNotFoundException("Instructor not found. Username: " + username));
     }
 
+
+    /**
+     * Finds a list of all instructors in the system.
+     *
+     * @return a list of instructors that are in the database
+     */
+    public List<Instructor> getAllInstructors() {
+        return new ArrayList<>(instructorRepository.findAll());
+    }
 
 }

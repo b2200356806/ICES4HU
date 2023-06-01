@@ -1,14 +1,17 @@
 package penguins.backend.Department;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
-public class DepartmentRepository {
-    private final List<Department> departments = new ArrayList<>();
+//@Component
+@Repository
+public /*class*/ interface DepartmentRepository extends JpaRepository<Department, Long> {
+    /*private final List<Department> departments = new ArrayList<>();
 
 
     public Optional<Department> findByName(String name) {
@@ -25,5 +28,9 @@ public class DepartmentRepository {
         departments.remove(department);
         departments.add(department);
         return department;
-    }
+    }*/
+
+    Optional<Department> findByName(String name);
+
+
 }

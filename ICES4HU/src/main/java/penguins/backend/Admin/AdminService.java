@@ -1,13 +1,14 @@
 package penguins.backend.Admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import penguins.backend.Course.Course;
 import penguins.backend.Course.CourseRepository;
 import penguins.backend.Course.CourseService;
 import penguins.backend.Course.CourseType;
-import penguins.backend.Course.CourseException.CourseAlreadyExistsException;
-import penguins.backend.Course.CourseException.CourseNotFoundException;
+import penguins.backend.Course.Exception.CourseAlreadyExistsException;
+import penguins.backend.Course.Exception.CourseNotFoundException;
 import penguins.backend.Department.Department;
 import penguins.backend.Department.DepartmentService;
 import penguins.backend.DepartmentManager.DepartmentManager;
@@ -34,19 +35,26 @@ import java.util.List;
 @Service
 public class AdminService {
 
-    private final AdminRepository adminRepository;
-    private final CourseService courseService;
-    private final UserService userService;
-    private final StudentService studentService;
-    private final DepartmentService departmentService;
-    private final DepartmentManagerService departmentManagerService;
-    private final InstructorService instructorService;
+    @Autowired
+    private CourseService courseService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private StudentService studentService;
+    @Autowired
+    private DepartmentService departmentService;
+    @Autowired
+    private InstructorService instructorService;
+    @Autowired
+    private DepartmentManagerService departmentManagerService;
 
     /* Used for addExamplesToDatabase() method */
     @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
-    private CourseRepository courseRepository;
+    private AdminRepository adminRepository;
+//    @Autowired
+//    private StudentRepository studentRepository;
+//    @Autowired
+//    private CourseRepository courseRepository;
     @Autowired
     private InstructorRepository instructorRepository;
     @Autowired
@@ -69,6 +77,7 @@ public class AdminService {
 
     /**
      * Returns a list of courses in the database.
+     *
      * @return ResponseEntity containing a list of courses
      */
     public List<Course> getCourses() {
@@ -78,6 +87,7 @@ public class AdminService {
 
     /**
      * Adds a course to the database if the course doesn't already exist.
+     *
      * @param course course object to add to the database
      * @return the created course in the database
      * @throws CourseAlreadyExistsException if there is another course in the database with the same course code
@@ -91,6 +101,7 @@ public class AdminService {
 
     /**
      * Removes a course from the database.
+     *
      * @param courseCode course code for the course to remove from the database
      * @throws CourseNotFoundException if there is no course in the database with the given course code
      */
@@ -101,6 +112,7 @@ public class AdminService {
 
     /**
      * Starts and finishes the semester.
+     *
      * @param isStarted true to start the semester, false to end the semester
      */
     public void startSemester(boolean isStarted) {
@@ -110,6 +122,7 @@ public class AdminService {
 
     /**
      * Starts and finishes the evaluation.
+     *
      * @param isStarted true to start, false to end
      */
     public void startEvaluation(boolean isStarted) {
@@ -119,6 +132,7 @@ public class AdminService {
 
     /**
      * Starts and finishes add or drop.
+     *
      * @param isStarted true to start, false to end
      */
     public void startAddOrDrop(boolean isStarted) {
@@ -128,6 +142,7 @@ public class AdminService {
 
     /**
      * Returns the semester info.
+     *
      * @return SemesterDto
      */
     public SemesterDto getSemester() {
@@ -141,12 +156,17 @@ public class AdminService {
 
     /**
      * Updates the attributes of the user.
-     * @param userId admin user id
+     *
+     * @param userId            admin user id
      * @param userUpdateRequest updated user attributes
      * @return updated admin
      */
     public Admin updateAdmin(long userId, UserUpdateRequest userUpdateRequest) throws UserNotFoundException {
         Admin admin = getAdminByUserId(userId);
+        /*admin.setFirstName(userUpdateRequest.getFirstName());
+        admin.setLastName(userUpdateRequest.getLastName());
+        admin.setUsername(admin.getUsername());
+        admin.setPassword(admin.getPassword());*/
         userService.updateUser(admin, userUpdateRequest);
         adminRepository.save(admin);
         return admin;
@@ -154,8 +174,9 @@ public class AdminService {
 
     /**
      * Admits the student.
+     *
      * @param userId student user id
-     * @param admit true to admit, false to reject
+     * @param admit  true to admit, false to reject
      * @return updated student
      * @throws UserNotFoundException if there is no student with the given id
      */
@@ -166,6 +187,7 @@ public class AdminService {
 
     /**
      * Creates the first admin object
+     *
      * @return true if new object created, false otherwise
      */
     public boolean createFirstAdmin() {
@@ -177,7 +199,7 @@ public class AdminService {
         admin.setLastName("Admin Lastname");
         admin.setUsername("admin");
         admin.setPassword("admin-password");
-        admin.setUserId(0);
+        admin.setUserId(0L);
         adminRepository.save(admin);
         userService.saveUser(admin);
         return true;
@@ -186,26 +208,28 @@ public class AdminService {
 
     /**
      * Finds the admin with the given user id.
+     *
      * @param userId admin user id
      * @return the admin with the given user id
      * @throws UserNotFoundException if there is no admin with the given user id
      */
-    public Admin getAdminByUserId(long userId) throws UserNotFoundException {
-        return adminRepository.findById(userId)
+    private Admin getAdminByUserId(long userId) throws UserNotFoundException {
+        return adminRepository.findByUserId(userId)
                 .orElseThrow(() -> new UserNotFoundException("Admin not found. User id: " + userId));
     }
 
 
     /**
      * Creates an instructor/departmentManager
+     *
      * @param instructorRegisterRequest the user register request
      */
     public void createInstructor(InstructorRegisterRequest instructorRegisterRequest) throws UserExistsException {
 
         String username = instructorRegisterRequest.getUsername();
-        if (userService.existsByUsername(username)) {
-            throw new UserExistsException("User exists with this username");
-        }
+//        if (userService.existsByUsername(username)) {
+//            throw new UserExistsException("User exists with this username");
+//        }
 
         boolean isDepartmentManager = instructorRegisterRequest.isDepartmentManager();
         Department department = departmentService.getOrCreateDepartment(instructorRegisterRequest.getDepartment().getName());
@@ -218,6 +242,7 @@ public class AdminService {
             departmentManager.setUsername(username);
             departmentManager.setPassword(instructorRegisterRequest.getPassword());
             departmentManager.setCourses(instructorRegisterRequest.getCourses());
+//            departmentManager.setUserId(5L);
             instructorService.saveInstructor(departmentManager);
             departmentManagerService.saveDepartmentManager(departmentManager);
         } else {
@@ -228,68 +253,79 @@ public class AdminService {
             instructor.setUsername(username);
             instructor.setPassword(instructorRegisterRequest.getPassword());
             instructor.setCourses(instructorRegisterRequest.getCourses());
+//            instructor.setUserId(10L);
             instructorService.saveInstructor(instructor);
+//            instructorRepository.save(instructor);
         }
     }
 
 
     /* ADD SOME EXAMPLES TO THE DATABASE */
-    public void addExamplesToDatabase() {
+//    public void addExamplesToDatabase() {
+//
+//        Department computerEngineering = new Department();
+//        computerEngineering.setName("Computer Engineering");
+//
+//        DepartmentManager departmentManager = new DepartmentManager();
+//        departmentManager.setFirstName("Department Manager Firstname");
+//        departmentManager.setLastName("Department Manager Lastname");
+//        departmentManager.setUsername("department-manager-username");
+//        departmentManager.setPassword("department-manager-password");
+//        departmentManager.setDepartment(computerEngineering);
+//        departmentManager.setUserId(500);
+//        departmentManager.setCourses(new ArrayList<>());
+//        instructorService.saveInstructor(departmentManager);
+//        departmentManagerService.saveDepartmentManager(departmentManager);
+//
+//
+//        Instructor instructor = new Instructor();
+//        instructor.setFirstName("Instructor Firstname");
+//        instructor.setLastName("Instructor Lastname");
+//        instructor.setDepartment(computerEngineering);
+//        instructor.setCourses(new ArrayList<>());
+//        instructor.setUsername("instructor-username");
+//        instructor.setPassword("instructor-password");
+//        instructor.setUserId(501);
+//        instructorService.saveInstructor(instructor);
+//
+//
+//        /* Create 10 students */
+//        for (int i = 1; i < 11; i++) {
+//            Student student = new Student();
+//            student.setUserId(i);
+//            student.setFirstName("Student" + i + " Firstname");
+//            student.setLastName("Student" + i + " Lastname");
+//            student.setUsername("student" + i + "username");
+//            student.setPassword("student" + i + "password");
+//            student.setStudentId(i * 10);
+//            student.setDepartment(computerEngineering);
+//            student.setCourses(new ArrayList<>());
+//            student.setAccountRegistered(true);
+//            studentRepository.save(student);
+//            userRepository.save(student);
+//        }
+//
+//        /* Create 99 courses */
+//        for (int i = 300; i < 400; i++) {
+//            Course course = new Course();
+//            course.setId(i);
+//            course.setCourseCode("BBM" + i);
+//            course.setDepartment(computerEngineering);
+//            course.setCourseType(CourseType.UNDERGRADUATE);
+//            course.setName("Introduction to BBM" + i);
+//            courseRepository.save(course);
+//        }
+//
+//    }
 
-        Department computerEngineering = new Department();
-        computerEngineering.setName("Computer Engineering");
 
-        DepartmentManager departmentManager = new DepartmentManager();
-        departmentManager.setFirstName("Department Manager Firstname");
-        departmentManager.setLastName("Department Manager Lastname");
-        departmentManager.setUsername("department-manager-username");
-        departmentManager.setPassword("department-manager-password");
-        departmentManager.setDepartment(computerEngineering);
-        departmentManager.setUserId(500);
-        departmentManager.setCourses(new ArrayList<>());
-        departmentManagerRepository.save(departmentManager);
-        userRepository.save(departmentManager);
-
-
-        Instructor instructor = new Instructor();
-        instructor.setFirstName("Instructor Firstname");
-        instructor.setLastName("Instructor Lastname");
-        instructor.setDepartment(computerEngineering);
-        instructor.setCourses(new ArrayList<>());
-        instructor.setUsername("instructor-username");
-        instructor.setPassword("instructor-password");
-        instructor.setUserId(501);
-        instructorRepository.save(instructor);
-        userRepository.save(instructor);
-
-
-        /* Create 10 students */
-        for (int i = 1; i < 11; i++) {
-            Student student = new Student();
-            student.setUserId(i);
-            student.setFirstName("Student" + i + " Firstname");
-            student.setLastName("Student" + i + " Lastname");
-            student.setUsername("student" + i + "username");
-            student.setPassword("student" + i + "password");
-            student.setStudentId(i * 10);
-            student.setDepartment(computerEngineering);
-            student.setCourses(new ArrayList<>());
-            student.setAccountRegistered(true);
-            studentRepository.save(student);
-            userRepository.save(student);
-        }
-
-        /* Create 99 courses */
-        for (int i = 300; i < 400; i++) {
-            Course course = new Course();
-            course.setId(i);
-            course.setCourseCode("BBM" + i);
-            course.setDepartment(computerEngineering);
-            course.setCourseType(CourseType.UNDERGRADUATE);
-            course.setName("Introduction to BBM" + i);
-            courseRepository.save(course);
-        }
-
+    /**
+     * Returns a list of instructors in the database.
+     *
+     * @return ResponseEntity containing a list of instructors
+     */
+    public List<Instructor> getInstructors() {
+        return instructorService.getAllInstructors();
     }
 
 }

@@ -23,6 +23,7 @@ public class EvaluationFormService {
     /**
      * Creates and evaluationForm for the given course if it doesn't already exist.
      * Otherwise, it returns the existing evaluationForm.
+     *
      * @param course Course to create an evaluationForm for
      * @return EvaluationForm for the course
      */
@@ -42,6 +43,7 @@ public class EvaluationFormService {
 
     /**
      * Gets evaluationForm for the given course.
+     *
      * @param course Course to create an evaluationForm for
      * @return EvaluationForm for the course
      */
@@ -50,11 +52,11 @@ public class EvaluationFormService {
     }
 
 
-
     /**
      * Adds an evaluationQuestion to the evaluationForm for the given course.
+     *
      * @param evaluationFormId The evaluationForm id for which the question is being created
-     * @param questionText EvaluationQuestion text
+     * @param questionText     EvaluationQuestion text
      * @return The evaluationForm for the course with the new question
      */
     public EvaluationForm addEvaluationQuestion(long evaluationFormId, String questionText) {
@@ -68,8 +70,9 @@ public class EvaluationFormService {
 
     /**
      * Removes the evaluationQuestion from the given evaluationForm.
+     *
      * @param evaluationFormId Evaluation form id
-     * @param questionId Question id
+     * @param questionId       Question id
      * @return the updated evaluation form
      */
     public EvaluationForm removeEvaluationQuestion(long evaluationFormId, long questionId) {
@@ -83,6 +86,7 @@ public class EvaluationFormService {
 
     /**
      * Finds the evaluation form using the given id
+     *
      * @param id evaluation form id
      * @return Evaluation form object with the given id
      */

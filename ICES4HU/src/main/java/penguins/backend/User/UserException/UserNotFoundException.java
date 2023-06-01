@@ -1,4 +1,4 @@
-package penguins.backend.User.Exception;
+package penguins.backend.User.UserException;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {
