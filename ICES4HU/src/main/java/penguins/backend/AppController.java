@@ -30,11 +30,6 @@ public class AppController {
         return "admin/manageAccount";
     }
 
-    @GetMapping("/admin/regRequest")
-    public String viewReg() {
-        return "admin/regRequest";
-    }
-
     @GetMapping("/student/homePage")
     public String viewStudentHome() {
         return "student/homePage";
