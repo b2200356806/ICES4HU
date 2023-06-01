@@ -1,16 +1,19 @@
 package penguins.backend.Course;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import penguins.backend.Department.Department;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
-public class CourseRepository {
+//@Component
+@Repository
+public interface CourseRepository extends JpaRepository<Course, Long> {
 
-    private final List<Course> courses = new ArrayList<>();
+    /*private final List<Course> courses = new ArrayList<>();
 
 
     public List<Course> findAll() {
@@ -56,5 +59,13 @@ public class CourseRepository {
 
     public void deleteByCourseCode(String courseCode) {
         courses.removeIf(course -> course.getCourseCode().equals(courseCode));
-    }
+    }*/
+
+    List<Course> findByDepartment(Department Department);
+
+   Optional<Course> findByCourseCode(String courseCode);
+
+    Boolean existsByCourseCode(String courseCode);
+
+    void deleteByCourseCode(String courseCode);
 }

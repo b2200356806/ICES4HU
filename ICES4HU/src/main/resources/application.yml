@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ices4hu_jwt_sec
+    url: jdbc:postgresql://localhost:5432/ICES4HU_Database
     username: postgres
-    password: manisa45
+    password: Danish0987654321
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

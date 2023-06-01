@@ -1,15 +1,19 @@
 package penguins.backend.Evaluation.CourseEvaluation;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import penguins.backend.Course.Course;
 import penguins.backend.Student.Student;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@Component
-public class CourseEvaluationRepository {
-    private final List<CourseEvaluation> courseEvaluations = new ArrayList<>();
+//@Component
+@Repository
+public interface CourseEvaluationRepository extends JpaRepository<CourseEvaluation, Long> {
+    /*private final List<CourseEvaluation> courseEvaluations = new ArrayList<>();
 
 
     public List<CourseEvaluation> findByCourse(Course course) {
@@ -36,6 +40,10 @@ public class CourseEvaluationRepository {
         courseEvaluations.remove(courseEvaluation);
         courseEvaluations.add(courseEvaluation);
         return courseEvaluation;
-    }
+    }*/
+
+    List<CourseEvaluation> findByCourse(Course course);
+
+    boolean existsByCourseAndStudent(Course course, Student student);
 
 }

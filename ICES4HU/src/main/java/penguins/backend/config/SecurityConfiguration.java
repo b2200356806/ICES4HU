@@ -29,8 +29,6 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-
-
                 .csrf().disable()
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
@@ -68,20 +66,10 @@ public class SecurityConfiguration {
                 .requestMatchers("/api/instructors/{userId}").hasRole(INSTRUCTOR.name())
 
                 .requestMatchers("/api/department-managers/{userId}").hasRole(DEPARTMENT_MANAGER.name())
-                                .requestMatchers("/css/**","/js/**").permitAll().anyRequest().permitAll()
 
-//                .anyRequest()
-//                .authenticated()
-                        )
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/homepage", true)
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .permitAll()
+                .anyRequest()
+                .authenticated())
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
 
 

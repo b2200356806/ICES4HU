@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class AdminRepository {
+
+/*public class AdminRepository {
     private final List<Admin> admins = new ArrayList<>();
 
     public Optional<Admin> findByUserId(long userId) {
@@ -30,8 +30,11 @@ public class AdminRepository {
         return admin;
     }
 
-}
-
-/*public interface AdminRepository extends JpaRepository<Admin, Long> {
-    Optional<Admin> findByUserId(long userId);
 }*/
+@Repository
+public interface AdminRepository extends JpaRepository<Admin, Long> {
+
+    Optional<Admin> findByUserId(long userId);
+
+
+}

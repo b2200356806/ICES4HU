@@ -31,7 +31,7 @@ public class JwtTokenUtil {
         String jwt = token.replace("Bearer", "");
         String username = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwt).getBody().getSubject();
 
-        Integer userId = userService.getUserIdByUsername(username) ;
+        Long userId = userService.getUserIdByUsername(username) ;
 
         return userId.toString();
     }

@@ -16,11 +16,11 @@ import static penguins.backend.User.Permission.*;
 public enum UserType {
     ADMIN(
             Set.of(
-                    ADMIN_READ,
-                    ADMIN_UPDATE,
-                    ADMIN_DELETE,
-                    ADMIN_CREATE
-            )
+                ADMIN_READ,
+                ADMIN_UPDATE,
+                ADMIN_DELETE,
+                ADMIN_CREATE
+        )
     ),
     DEPARTMENT_MANAGER(
             Set.of(

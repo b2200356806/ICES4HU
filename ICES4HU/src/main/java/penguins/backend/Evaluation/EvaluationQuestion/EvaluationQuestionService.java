@@ -14,7 +14,6 @@ public class EvaluationQuestionService {
 
     /**
      * Creates and returns an EvaluationQuestion object based on the given question text.
-     *
      * @param questionText the question text
      * @return EvaluationQuestion object created
      */
@@ -28,7 +27,6 @@ public class EvaluationQuestionService {
 
     /**
      * Removes the evaluationQuestion from the database.
-     *
      * @param questionId Question id
      */
     public void removeEvaluationQuestion(long questionId) {
@@ -38,7 +36,6 @@ public class EvaluationQuestionService {
 
     /**
      * Finds and returns the evaluation question with the given id.
-     *
      * @param questionId question id
      * @return Evaluation question with the given id
      * @throws EvaluationQuestionNotFoundException if there is no evaluation question with the given id

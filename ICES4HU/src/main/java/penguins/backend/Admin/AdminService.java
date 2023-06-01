@@ -13,18 +13,14 @@ import penguins.backend.Department.Department;
 import penguins.backend.Department.DepartmentService;
 import penguins.backend.DepartmentManager.DepartmentManager;
 import penguins.backend.DepartmentManager.DepartmentManagerRepository;
-import penguins.backend.DepartmentManager.DepartmentManagerService;
 import penguins.backend.Instructor.Instructor;
-import penguins.backend.Instructor.InstructorRegisterRequest;
 import penguins.backend.Instructor.InstructorRepository;
-import penguins.backend.Instructor.InstructorService;
 import penguins.backend.Semester.Semester;
 import penguins.backend.Semester.SemesterDto;
 import penguins.backend.Student.Student;
 import penguins.backend.Student.StudentRepository;
 import penguins.backend.Student.StudentService;
-import penguins.backend.User.UserException.UserExistsException;
-import penguins.backend.User.UserException.UserNotFoundException;
+import penguins.backend.User.Exception.UserNotFoundException;
 import penguins.backend.User.UserRepository;
 import penguins.backend.User.UserService;
 import penguins.backend.User.UserUpdateRequest;
@@ -40,8 +36,6 @@ public class AdminService {
     private final UserService userService;
     private final StudentService studentService;
     private final DepartmentService departmentService;
-    private final DepartmentManagerService departmentManagerService;
-    private final InstructorService instructorService;
 
     /* Used for addExamplesToDatabase() method */
     @Autowired
@@ -56,21 +50,17 @@ public class AdminService {
     private UserRepository userRepository;
 
     public AdminService(AdminRepository adminRepository, CourseService courseService, UserService userService,
-                        StudentService studentService, DepartmentService departmentService,
-                        DepartmentManagerService departmentManagerService, InstructorService instructorService) {
+                        StudentService studentService, DepartmentService departmentService) {
         this.adminRepository = adminRepository;
         this.courseService = courseService;
         this.userService = userService;
         this.studentService = studentService;
         this.departmentService = departmentService;
-        this.departmentManagerService = departmentManagerService;
-        this.instructorService = instructorService;
     }
 
 
     /**
      * Returns a list of courses in the database.
-     *
      * @return ResponseEntity containing a list of courses
      */
     public List<Course> getCourses() {
@@ -80,7 +70,6 @@ public class AdminService {
 
     /**
      * Adds a course to the database if the course doesn't already exist.
-     *
      * @param course course object to add to the database
      * @return the created course in the database
      * @throws CourseAlreadyExistsException if there is another course in the database with the same course code
@@ -94,7 +83,6 @@ public class AdminService {
 
     /**
      * Removes a course from the database.
-     *
      * @param courseCode course code for the course to remove from the database
      * @throws CourseNotFoundException if there is no course in the database with the given course code
      */
@@ -105,7 +93,6 @@ public class AdminService {
 
     /**
      * Starts and finishes the semester.
-     *
      * @param isStarted true to start the semester, false to end the semester
      */
     public void startSemester(boolean isStarted) {
@@ -115,7 +102,6 @@ public class AdminService {
 
     /**
      * Starts and finishes the evaluation.
-     *
      * @param isStarted true to start, false to end
      */
     public void startEvaluation(boolean isStarted) {
@@ -125,7 +111,6 @@ public class AdminService {
 
     /**
      * Starts and finishes add or drop.
-     *
      * @param isStarted true to start, false to end
      */
     public void startAddOrDrop(boolean isStarted) {
@@ -135,7 +120,6 @@ public class AdminService {
 
     /**
      * Returns the semester info.
-     *
      * @return SemesterDto
      */
     public SemesterDto getSemester() {
@@ -149,8 +133,7 @@ public class AdminService {
 
     /**
      * Updates the attributes of the user.
-     *
-     * @param userId            admin user id
+     * @param userId admin user id
      * @param userUpdateRequest updated user attributes
      * @return updated admin
      */
@@ -163,9 +146,8 @@ public class AdminService {
 
     /**
      * Admits the student.
-     *
      * @param userId student user id
-     * @param admit  true to admit, false to reject
+     * @param admit true to admit, false to reject
      * @return updated student
      * @throws UserNotFoundException if there is no student with the given id
      */
@@ -176,7 +158,6 @@ public class AdminService {
 
     /**
      * Creates the first admin object
-     *
      * @return true if new object created, false otherwise
      */
     public boolean createFirstAdmin() {
@@ -188,7 +169,7 @@ public class AdminService {
         admin.setLastName("Admin Lastname");
         admin.setUsername("admin");
         admin.setPassword("admin-password");
-        admin.setUserId(0);
+        admin.setUserId(0L);
         adminRepository.save(admin);
         userService.saveUser(admin);
         return true;
@@ -197,55 +178,14 @@ public class AdminService {
 
     /**
      * Finds the admin with the given user id.
-     *
      * @param userId admin user id
      * @return the admin with the given user id
      * @throws UserNotFoundException if there is no admin with the given user id
      */
-    public Admin getAdminByUserId(long userId) throws UserNotFoundException {
+    private Admin getAdminByUserId(long userId) throws UserNotFoundException {
         return adminRepository.findByUserId(userId)
                 .orElseThrow(() -> new UserNotFoundException("Admin not found. User id: " + userId));
     }
-
-
-//    /**
-//     * Creates an instructor/departmentManager
-//     *
-//     * @param instructorRegisterRequest the user register request
-//     */
-//    public void createInstructor(InstructorRegisterRequest instructorRegisterRequest) throws UserExistsException {
-//
-//        String username = instructorRegisterRequest.getUsername();
-//        if (userService.existsByUsername(username)) {
-//            throw new UserExistsException("User exists with this username");
-//        }
-//
-//        boolean isDepartmentManager = instructorRegisterRequest.isDepartmentManager();
-//        Department department = departmentService.getOrCreateDepartment(instructorRegisterRequest.getDepartment().getName());
-//
-//        if (isDepartmentManager) {
-//            DepartmentManager departmentManager = new DepartmentManager();
-//            departmentManager.setDepartment(department);
-//            departmentManager.setFirstName(instructorRegisterRequest.getFirstName());
-//            departmentManager.setLastName(instructorRegisterRequest.getLastName());
-//            departmentManager.setUsername(username);
-//            departmentManager.setPassword(instructorRegisterRequest.getPassword());
-//            departmentManager.setCourses(instructorRegisterRequest.getCourses());
-//            departmentManager.setUserId(5);
-//            instructorService.saveInstructor(departmentManager);
-//            departmentManagerService.saveDepartmentManager(departmentManager);
-//        } else {
-//            Instructor instructor = new Instructor();
-//            instructor.setDepartment(department);
-//            instructor.setFirstName(instructorRegisterRequest.getFirstName());
-//            instructor.setLastName(instructorRegisterRequest.getLastName());
-//            instructor.setUsername(username);
-//            instructor.setPassword(instructorRegisterRequest.getPassword());
-//            instructor.setCourses(instructorRegisterRequest.getCourses());
-//            instructor.setUserId(10);
-//            instructorService.saveInstructor(instructor);
-//        }
-//    }
 
 
     /* ADD SOME EXAMPLES TO THE DATABASE */
@@ -260,10 +200,10 @@ public class AdminService {
         departmentManager.setUsername("department-manager-username");
         departmentManager.setPassword("department-manager-password");
         departmentManager.setDepartment(computerEngineering);
-        departmentManager.setUserId(500);
+        departmentManager.setUserId(500L);
         departmentManager.setCourses(new ArrayList<>());
-        instructorService.saveInstructor(departmentManager);
-        departmentManagerService.saveDepartmentManager(departmentManager);
+        departmentManagerRepository.save(departmentManager);
+        userRepository.save(departmentManager);
 
 
         Instructor instructor = new Instructor();
@@ -273,14 +213,15 @@ public class AdminService {
         instructor.setCourses(new ArrayList<>());
         instructor.setUsername("instructor-username");
         instructor.setPassword("instructor-password");
-        instructor.setUserId(501);
-        instructorService.saveInstructor(instructor);
+        instructor.setUserId(501L);
+        instructorRepository.save(instructor);
+        userRepository.save(instructor);
 
 
         /* Create 10 students */
         for (int i = 1; i < 11; i++) {
             Student student = new Student();
-            student.setUserId(i);
+            student.setUserId((long) i);
             student.setFirstName("Student" + i + " Firstname");
             student.setLastName("Student" + i + " Lastname");
             student.setUsername("student" + i + "username");
@@ -304,16 +245,6 @@ public class AdminService {
             courseRepository.save(course);
         }
 
-    }
-
-
-    /**
-     * Returns a list of instructors in the database.
-     *
-     * @return ResponseEntity containing a list of instructors
-     */
-    public List<Instructor> getInstructors() {
-        return instructorService.getAllInstructors();
     }
 
 }

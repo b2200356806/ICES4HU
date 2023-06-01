@@ -1,7 +1,7 @@
 package penguins.backend.User;
 
 import org.springframework.stereotype.Service;
-import penguins.backend.User.UserException.UserNotFoundException;
+import penguins.backend.User.Exception.UserNotFoundException;
 
 @Service
 public class UserService {
@@ -15,8 +15,7 @@ public class UserService {
 
     /**
      * Updates the attribute of the user
-     *
-     * @param user              user object
+     * @param user user object
      * @param userUpdateRequest updated user attributes
      * @return updated user
      */
@@ -32,7 +31,6 @@ public class UserService {
 
     /**
      * Returns the user type
-     *
      * @param userId user id
      * @return userType of the user
      * @throws UserNotFoundException if there is no user with the given id
@@ -43,7 +41,7 @@ public class UserService {
         return user.getUserType();
     }
 
-    public Integer getUserIdByUsername(String username) throws UserNotFoundException{
+    public Long getUserIdByUsername(String username) throws UserNotFoundException{
 
         User user = userRepository.findUserIDByUserName(username).
                 orElseThrow(() -> new UserNotFoundException("User not found. User id:" ));
@@ -62,12 +60,10 @@ public class UserService {
 
     /**
      * Saves the user
-     *
      * @param user the user object
      */
     public void saveUser(User user) {
         userRepository.save(user);
     }
-
 
 }

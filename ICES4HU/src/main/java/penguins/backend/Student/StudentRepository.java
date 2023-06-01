@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
-public class StudentRepository {
+//@Component
+@Repository
+public interface StudentRepository extends JpaRepository<Student,Long>{
 
-    private final List<Student> students = new ArrayList<>();
+    /*private final List<Student> students = new ArrayList<>();
 
     public List<Student> findAll() {
         return this.students;
@@ -29,12 +30,9 @@ public class StudentRepository {
         students.remove(student);
         students.add(student);
         return student;
-    }
+    }*/
+
+    Optional<Student> findById(long id);
 }
 
-/*@Repository
-public interface StudentRepository extends JpaRepository<Student, Long>
-{
-    Optional<Student> findById(long userId);
-}*/
 

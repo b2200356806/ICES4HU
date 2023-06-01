@@ -5,11 +5,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import penguins.backend.Student.Student;
+import penguins.backend.Student.StudentRepository;
 import penguins.backend.Token.Token;
 import penguins.backend.Token.TokenRepository;
 import penguins.backend.Token.TokenType;
 import penguins.backend.User.User;
 import penguins.backend.User.UserRepository;
+import penguins.backend.User.UserType;
 import penguins.backend.config.JwtService;
 
 @Service
@@ -17,6 +20,7 @@ import penguins.backend.config.JwtService;
 public class AuthenticationService {
 
     private final UserRepository repository;
+    private final StudentRepository studentRepository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -31,7 +35,23 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .userType(request.getUserType())
                 .build();
+
         var savedUser = repository.save(user);
+
+        if (user.getUserType() == UserType.STUDENT) {
+            Student student = new Student();
+            student.setStudentId(savedUser.getUserId());
+            student.setFirstName(savedUser.getFirstName());
+            student.setLastName(savedUser.getLastName());
+            student.setUsername(savedUser.getUsername());
+            student.setPassword(savedUser.getPassword());
+            student.setUserType(savedUser.getUserType());
+            student.setAccountRegistered(true);
+
+            studentRepository.save(student); // Save student in the Student table
+        }
+
+
         //saved user into the database
         var jwtToken = jwtService.generateToken(user);
         saveUserToken(savedUser, jwtToken);
@@ -69,7 +89,7 @@ public class AuthenticationService {
         tokenRepository.save(token);
     }
     private void revokeAllUserTokens(User user) {
-        var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getUserId());
+        var validUserTokens = tokenRepository.findAllValidTokenByUser(Math.toIntExact(user.getUserId()));
         if (validUserTokens.isEmpty())
             return;
         validUserTokens.forEach(token -> {
