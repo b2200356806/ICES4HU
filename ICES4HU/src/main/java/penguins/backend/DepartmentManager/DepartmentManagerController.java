@@ -177,7 +177,6 @@ public class DepartmentManagerController {
 
     /**
      * Finds the instructor user id based on the department manager user id
-     *
      * @param userId department manager user id
      * @return ResponseEntity containing instructor user id
      */

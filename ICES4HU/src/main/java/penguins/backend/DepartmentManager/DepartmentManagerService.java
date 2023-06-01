@@ -164,7 +164,6 @@ public class DepartmentManagerService {
 
     /**
      * Finds the instructor user id based on the department manager user id
-     *
      * @param departmentManagerId department manager user id
      * @return instructor user id
      * @throws UserNotFoundException if there is no user with the given information

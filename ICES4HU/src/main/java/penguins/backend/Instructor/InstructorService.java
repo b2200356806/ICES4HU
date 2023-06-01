@@ -200,7 +200,6 @@ public class InstructorService {
 
     /**
      * Finds the instructor with username.
-     *
      * @param username instructor username
      * @return the instructor with the given username
      */

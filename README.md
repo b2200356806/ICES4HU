@@ -83,3 +83,8 @@ However, to send an object without such note, you need to send all the attribute
 
 4. Student homepage: http://localhost:8080/student/homePage
 5. Student enroll courses: http://localhost:8080/student/enrollCourses
+
+
+1. getusername : http://localhost:8080/api/Authentication/getUsername
+2. getuserid : http://localhost:8080/api/Authentication/getUserId
+3. getusertype : http://localhost:8080/api/Authentication/getUserType
